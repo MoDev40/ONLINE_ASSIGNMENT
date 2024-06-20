@@ -1,0 +1,76 @@
+    // const classroom = await prisma.classroom.findUnique({
+    //   where:{
+    //     joinCode:"ABC123"
+    //   }
+    // })
+
+    // if(!classroom) {
+    //   throw new Error("Classroom not found")
+    // }
+
+    // const userClassroom = await prisma.userClassroom.findFirst({
+    //   where:{
+    //     user:{
+    //       id:"clxn0r2q50001zwnlo2xx1ib7"
+    //     },
+    //     classroom:{
+    //       id:classroom.id
+    //     }
+    //   }
+    // })
+    // user join classroom
+    // await prisma.userClassroom.create({
+    //   data:{
+    //     user:{
+    //       connect:{
+    //         id:"clxn0r2q50001zwnlo2xx1ib7"
+    //       }
+    //     },
+    //     classroom:{
+    //       connect:{
+    //         id:classroom.id
+    //       }
+    //     }
+    //   }
+    // })
+
+    // create assignment
+    // await prisma.assignment.create({
+    //   data:{
+    //     title:"Assignment 1",
+    //     classroom:{
+    //       connect:{
+    //         id:classroom.id
+    //       }
+    //     },
+    //     fileUrl:"test",
+    //     dueDate:new Date("2024-01-01"),
+    //     description:"Assignment 1 description"
+    //   }
+    // })
+
+    // if(!userClassroom){
+    //   console.log("user not in classroom")
+    //   return
+    // }
+    // // student submissions completed assignment
+    // await prisma.submission.create({
+    //   data:{
+    //     assignment:{
+    //       connect:{
+    //         id:"clxn1kzve0000nwdwv6bthz0q"
+    //       }
+    //     },
+    //     classroom:{
+    //       connect:{
+    //         id:classroom.id
+    //       }
+    //     },
+    //     userClassroom:{
+    //       connect:{
+    //         id:userClassroom.id
+    //       }
+    //     },
+    //     fileUrl:"test",
+    //   }
+    // })
