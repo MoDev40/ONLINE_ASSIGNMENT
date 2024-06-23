@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <div className='flex flex-col h-screen text-center gap-4 items-center justify-center'>
         <section>
-            <h1 className='text-5xl font-bold text'>Online Assignments</h1>
+            <h1 className='text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl'>Online Assignments</h1>
             <p className='text-xl font-light'>A simple way to manage your assignments</p>
         </section>
         <section className='flex flex-row items-center'>
