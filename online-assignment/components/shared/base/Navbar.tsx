@@ -14,7 +14,7 @@ const Navbar = () => {
               <UserButton/>
             </SignedIn>
             <SignedOut>
-              <Link href='/sign-in'><Button className="px-5 ">Login</Button></Link>
+              <Link href='/auth/sign-in'><Button className="px-5 ">Login</Button></Link>
             </SignedOut>
               </li>
           </ul>
