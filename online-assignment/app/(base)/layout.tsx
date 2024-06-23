@@ -1,10 +1,11 @@
+import Navbar from '@/components/shared/base/Navbar'
 import React from 'react'
 
 function layout({children}:{
     children:React.ReactNode
 }) {
   return (
-    <div className="relative isolate min-h-screen">
+    <div className="relative isolate p-5 container mx-auto">
       <div
         className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
         aria-hidden="true"
@@ -17,6 +18,7 @@ function layout({children}:{
           }}
         />
       </div>
+      <Navbar/>
       {children}
       <div
         className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"

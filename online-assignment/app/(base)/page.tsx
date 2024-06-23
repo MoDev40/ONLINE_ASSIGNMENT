@@ -1,8 +1,9 @@
+import Home from "@/components/shared/base/Home"
 
-function Home() {
+function HomePage() {
   return (
-    <div>Home</div>
+    <Home/>
   )
 }
 
-export default Home
+export default HomePage
