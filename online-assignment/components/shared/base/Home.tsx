@@ -1,7 +1,6 @@
 "use client"
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import React from 'react'
 
 const Home = () => {
   return (
@@ -11,7 +10,7 @@ const Home = () => {
             <p className='text-xl font-light'>A simple way to manage your assignments</p>
         </section>
         <section className='flex flex-row items-center'>
-            <Link href='/sign-in'>
+            <Link href='/auth/sign-in'>
             <Button className='rounded-r-none'>Start</Button>
             </Link>
             <Button variant="outline" className='rounded-l-none'>Demo</Button>
