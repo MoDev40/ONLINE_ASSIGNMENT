@@ -1,9 +1,9 @@
+import "@/app/globals.css";
 import type { Metadata } from "next";
-import "@/app/globals.css"
-import { Inter as FontSans } from "next/font/google"
+import { Inter as FontSans } from "next/font/google";
 
-import { cn } from "@/lib/utils"
-import { ClerkProvider } from "@clerk/nextjs";
+import { cn } from "@/lib/utils";
+import Providers from "@/utils/Providers";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -23,8 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head />
-      <ClerkProvider>
-
+      <Providers>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
@@ -33,7 +32,7 @@ export default function RootLayout({
         >
       {children}
       </body>
-      </ClerkProvider>
+      </Providers>
     </html>
   )
 }
