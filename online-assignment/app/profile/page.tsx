@@ -1,11 +1,9 @@
-// import Profile from "@/components/shared/profile/Profile"
-// import { auth } from "@clerk/nextjs/server"
+import React from 'react'
 
-// function ProfilePage() {
-//     const {userId} = auth()
-//   return (
-//     <Profile id={userId!} />
-//   )
-// }
+function ProfilePage() {
+  return (
+    <div>ProfilePage</div>
+  )
+}
 
-// export default ProfilePage
+export default ProfilePage

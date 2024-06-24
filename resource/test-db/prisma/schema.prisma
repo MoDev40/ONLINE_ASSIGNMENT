@@ -3,16 +3,16 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id             String   @id @default(uuid()) @db.Uuid
+  id             String   @id @default(uuid())
   email          String   @unique
   clerkId        String   @unique
-  idCard         String?  @unique @db.VarChar(20) 
-  className      String?  @db.VarChar(20)  
+  idCard         String?  @unique 
+  className      String?   
   name           String?
   role           String   @default("student")  // 'teacher' or 'student'
   createdAt      DateTime        @default(now())
@@ -22,7 +22,7 @@ model User {
 
 
 model Classroom {
-  id          String   @id @default(uuid()) @db.Uuid
+  id          String   @id @default(uuid())
   name        String
   teacherId   String
   joinCode    String   @unique
@@ -35,7 +35,7 @@ model Classroom {
 
 
 model Assignment {
-  id          String   @id @default(uuid()) @db.Uuid
+  id          String   @id @default(uuid())
   title       String
   description String?
   fileUrl     String
@@ -49,7 +49,7 @@ model Assignment {
 
 
 model Submission {
-  id            String   @id @default(uuid()) @db.Uuid
+  id            String   @id @default(uuid())
   assignmentId  String
   studentId     String
   classroomId   String
@@ -63,13 +63,12 @@ model Submission {
 
 
 model UserClassroom {
-  id          String   @id @default(uuid()) @db.Uuid
+  id          String   @id @default(uuid())
   userId      String
   classroomId String
   user        User     @relation(fields: [userId], references: [id],onDelete: Cascade)
   classroom   Classroom @relation(fields: [classroomId], references: [id],onDelete: Cascade)
   submissions Submission[]
   joinedAt      DateTime        @default(now())
-
 }
 

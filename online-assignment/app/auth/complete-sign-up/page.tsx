@@ -1,10 +1,10 @@
-import CompleteSignUp from '@/components/shared/CompleteSignUp'
+import CompleteSignUp from '@/components/shared/CompleteSignUp';
 import { auth } from '@clerk/nextjs/server'
 
 function CompleteSignUpPage() {
-    const {userId} = auth()
+  const { userId } : { userId: string | null } = auth();
   return (
-  <CompleteSignUp id={userId!} />
+    <CompleteSignUp id={userId as string} />
   )
 }
 
