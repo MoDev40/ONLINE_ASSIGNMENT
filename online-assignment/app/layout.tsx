@@ -4,6 +4,7 @@ import { Inter as FontSans } from "next/font/google";
 
 import { cn } from "@/lib/utils";
 import Providers from "@/utils/Providers";
+import { Toaster } from "react-hot-toast";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -30,6 +31,9 @@ export default function RootLayout({
           fontSans.variable
         )}
         >
+      <Toaster 
+      reverseOrder={false}
+    />
       {children}
       </body>
       </Providers>
