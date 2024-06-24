@@ -1,5 +1,5 @@
-import CompleteSignUp from '@/components/shared/CompleteSignUp';
-import { auth } from '@clerk/nextjs/server'
+import CompleteSignUp from '@/components/_component/CompleteSignUp';
+import { auth } from '@clerk/nextjs/server';
 
 function CompleteSignUpPage() {
   const { userId } : { userId: string | null } = auth();

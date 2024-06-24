@@ -1,4 +1,4 @@
-import Navbar from '@/components/shared/base/Navbar'
+import Navbar from '@/components/_component/base/Navbar'
 import React from 'react'
 
 function layout({children}:{
