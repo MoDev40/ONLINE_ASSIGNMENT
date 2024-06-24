@@ -1,0 +1,83 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+
+// prisma/schema.prisma
+datasource db {
+  provider  = "postgresql"
+  url  	    = env("DATABASE_URL")
+  // uncomment next line if you use Prisma <5.10
+  // directUrl = env("DATABASE_URL_UNPOOLED")
+}
+
+model User {
+  id             String   @id @default(uuid())
+  email          String   @unique
+  clerkId        String   @unique
+  idCard         String?  @unique @db.VarChar(20) 
+  className      String?  @db.VarChar(20)  
+  name           String?
+  role           String   @default("student")  // 'teacher' or 'student'
+  createdAt      DateTime        @default(now())
+  userClassrooms  UserClassroom[]
+  createdClassrooms Classroom[]  // Classrooms created by the teacher
+}
+
+
+model Classroom {
+  id          String   @id @default(uuid())
+  name        String
+  teacherId   String  
+  joinCode    String   @unique
+  assignments Assignment[]
+  submissions Submission[]
+  createdAt      DateTime        @default(now())
+  userClassrooms UserClassroom[]
+  teacher     User         @relation(fields: [teacherId], references: [id],onDelete: Cascade)  // Relation to the User model
+}
+
+
+model Assignment {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  fileUrl     String
+  fileKey     String
+  classroomId String
+  dueDate     DateTime
+  createdAt   DateTime        @default(now())
+  submissions Submission[]
+  classroom   Classroom @relation(fields: [classroomId], references: [id],onDelete: Cascade)
+}
+
+
+model Submission {
+  id            String   @id @default(uuid())
+  assignmentId  String
+  studentId     String
+  classroomId   String
+  fileUrl       String
+  fileKey       String
+  submittedAt   DateTime @default(now())
+  assignment    Assignment @relation(fields: [assignmentId], references: [id],onDelete: Cascade)
+  classroom     Classroom @relation(fields: [classroomId], references: [id],onDelete: Cascade)
+  userClassroom UserClassroom @relation(fields: [studentId], references: [id],onDelete: Cascade)
+}
+
+
+model UserClassroom {
+  id          String   @id @default(uuid())
+  userId      String
+  classroomId String
+  user        User     @relation(fields: [userId], references: [id],onDelete: Cascade)
+  classroom   Classroom @relation(fields: [classroomId], references: [id],onDelete: Cascade)
+  submissions Submission[]
+  joinedAt      DateTime        @default(now())
+}
