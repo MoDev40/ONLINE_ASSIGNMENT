@@ -12,7 +12,6 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "../ui/input"
 import Loading from "./Loading"
 import RoleSelection from "./RoleSelection"
-import { useRouter } from "next/navigation"
 
 
 const schema = z.object({
@@ -35,8 +34,11 @@ function isEmpty ( id:string,name:string,className:string ) : boolean {
 
 type Inputs = z.infer<typeof schema>
 
-function CompleteSignUp({ id }:{ id:string }) {
-  const { data:user,isFetching } = useGetUserQuery(id)
+type CompleteSignUpProps = {
+  id:string | undefined;
+}
+const  CompleteSignUp = ({ id }:CompleteSignUpProps) => {
+  const { data:user,isFetching } = useGetUserQuery(id as string)
   const [role, setRole] = useState<string>("student")
 
   const [ completeSignUp,{ isLoading,isError }] = useCompleteSingUpMutation()
@@ -57,14 +59,17 @@ function CompleteSignUp({ id }:{ id:string }) {
     }).catch(()=>{
       toast.error("Failed try again")
     })
+
+  }
+  if(user?.name && user?.idCard && user.className || user?.role === "teacher"){
+    window.location.pathname="/"
+    return null
   }
 
-  const router = useRouter()
   return (
-  isFetching ? ( <Loading/>) : (
-  user&&
-  user?.name && user?.idCard && user.className || user?.role === "teacher" ? router.push("/") :
   <div className="flex flex-col justify-center h-screen container mx-auto">
+    {
+      isFetching ? <Loading/> : (
       <Card>
         <CardHeader>
           <CardTitle>Complete Sign Up</CardTitle>
@@ -128,8 +133,8 @@ function CompleteSignUp({ id }:{ id:string }) {
         </Form>
         </CardContent>
      </Card>
+     )}
   </div>
   )
-)}
-
+}
 export default CompleteSignUp
