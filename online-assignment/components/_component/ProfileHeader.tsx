@@ -22,20 +22,20 @@ const ProfileHeader = ({ user }:ProfileHeaderProps) => {
             <CardTitle>
                 <AvatarCard fallback={user?.email?.charAt(0).toUpperCase()}/>
             </CardTitle>
-            <CardDescription className="space-y-1">
+            <CardDescription className="space-y-1 flex flex-col">
                 <Label>{user?.email}</Label>
-                <Label>{user?.name}</Label>
+                <Label>{user?.name || user.role}</Label>
             </CardDescription>
         </CardHeader>
         <CardContent className={cn(
             "flex flex-col md:flex-row items-center justify-center text-center"
         )}>
-            <Card className="w-full md:rounded-r-none">
+            <Card className="w-full shadow-sm md:rounded-r-none">
                 <CardHeader>
                 <CardTitle>{user?.role === "student" ? user.className : 0}</CardTitle>
                 </CardHeader>
             </Card>
-            <Card className="w-full md:rounded-l-none">
+            <Card className="w-full shadow-sm md:rounded-l-none">
                 <CardHeader>
                 <CardTitle>{user?.role === "student" ? user.idCard : 0}</CardTitle>
                 </CardHeader>
