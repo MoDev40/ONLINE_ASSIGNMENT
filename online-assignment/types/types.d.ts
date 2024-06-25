@@ -12,3 +12,35 @@ declare type UserData = {
     role: string;
     createdAt: Date;
 }
+
+declare type Assignments = {
+    id: string;
+    title: string;
+    description: string | null;
+    fileUrl: string;
+    fileKey: string;
+    classroomId: string;
+    dueDate: Date;
+    createdAt: Date;
+}
+
+declare type ClassRoom = {
+    id: string;
+    name: string;
+    teacherId: string;
+    joinCode: string;
+    createdAt: Date;
+}
+
+declare interface TeacherClassRoom  extends ClassRoom {
+    assignments: Assignment[];
+    userClassrooms:any[];
+}
+
+declare type CreateUpdateRoom = {
+    teacherId:string;
+    room:{
+        roomId?:string;
+        name:string;
+    }
+}
