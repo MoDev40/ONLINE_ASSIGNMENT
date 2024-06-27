@@ -1,5 +1,5 @@
 import prisma from "@/lib/client";
-import { generateKey } from "crypto";
+import randomatic from "randomatic"
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req:NextRequest,{params}:{params:RouteParams}){
@@ -21,13 +21,8 @@ export async function POST(req:NextRequest,{params}:{params:RouteParams}){
             return NextResponse.json({message:"Unable to find teacher or an authorized user"},{status:401})
         }
 
-        let joinCode = "";
-        // why length is 24 because we need 6 digit in hex 1 digit is equal to 4 bit like 5 = 0101
-        generateKey('hmac', { length: 24 ,}, (err, key) => {
-            if (err) throw err;
-            joinCode = key.export().toString('hex').toUpperCase();
-        });
-
+        let joinCode = randomatic("A0",6)
+        
         const classRoom = await prisma.classroom.create({
             data:{
                 name,
