@@ -44,3 +44,11 @@ declare type CreateUpdateRoom = {
         name:string;
     }
 }
+
+declare type RoomUsers = {
+    user:UserData,
+    id: string;
+    userId: string;
+    classroomId: string;
+    joinedAt: Date;
+}

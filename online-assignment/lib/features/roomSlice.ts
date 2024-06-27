@@ -44,6 +44,11 @@ const roomSLice = createApi({
             providesTags:["room"]
         }),
 
+        getRoomUsers:builder.query<RoomUsers[],string>({
+            query:(id)=> `/rooms/${id}/users`,
+            providesTags:["room"]
+        }),
+        
         deleteRoom:builder.mutation<string,DeleteRoomParams>({
             query:({roomId,teacherId})=>({
                 url:`/rooms/${roomId}/delete/${teacherId}`,
@@ -63,4 +68,5 @@ export const {
     useUpdateRoomMutation,
     useDeleteRoomMutation,
     useGetRoomQuery,
+    useGetRoomUsersQuery,
 } = roomSLice;
