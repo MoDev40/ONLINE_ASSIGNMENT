@@ -52,3 +52,18 @@ declare type RoomUsers = {
     classroomId: string;
     joinedAt: Date;
 }
+
+declare type StudentRoom = {
+    id: string;
+    userId: string;
+    classroomId: string;
+    joinedAt: Date;
+}
+
+declare interface StudentRoomsWithAssignments extends StudentRoom {
+    classroom:ClassroomWithAssignments
+}
+
+declare interface ClassroomWithAssignments extends ClassRoom {
+    assignments:Assignments[]
+}

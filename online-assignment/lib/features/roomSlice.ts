@@ -56,6 +56,19 @@ const roomSLice = createApi({
             }),
             invalidatesTags:['room']
         }),
+
+        joinRoom:builder.mutation<StudentRoom,string>({
+            query:(student_id)=>({
+                url:`/rooms/${student_id}/join`,
+                method: 'POST',
+            }),
+            invalidatesTags:["room"]
+        }),
+
+        getStudentRooms:builder.query<StudentRoomsWithAssignments,string>({
+            query:(id)=> `/rooms/${id}/student-class`,
+            providesTags:["room"]
+        })
         
     })
 })
@@ -69,4 +82,6 @@ export const {
     useDeleteRoomMutation,
     useGetRoomQuery,
     useGetRoomUsersQuery,
+    useGetStudentRoomsQuery,
+    useJoinRoomMutation
 } = roomSLice;

@@ -10,14 +10,11 @@ export async function POST(req:NextRequest,{params}:{params:RouteParams}){
 
         const teacher = await prisma.user.findFirst({
             where:{
-                AND:[
-
-                    {id},
-                    {role:"teacher"}
-                ]
+                id
             }
         })
-        if(!teacher){
+        
+        if(!teacher || teacher.role === 'teacher'){
             return NextResponse.json({message:"Unable to find teacher or an authorized user"},{status:401})
         }
 
