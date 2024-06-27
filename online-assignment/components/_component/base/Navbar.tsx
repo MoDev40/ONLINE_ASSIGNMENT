@@ -9,7 +9,7 @@ const Navbar = () => {
   const scrolled = useScroll(50);
   return (
     <div
-      className={`fixed top-0 w-full flex flex-col p-4 justify-between gap-4 ${
+      className={`fixed top-0 w-full flex flex-col p-4 justify-between ${
       scrolled
         ? "border-b border-gray-200 bg-white/50 backdrop-blur-xl"
         : "bg-white/0"
@@ -18,6 +18,13 @@ const Navbar = () => {
         <section className="flex flex-row justify-between items-center">
           <Link href='/'><h1 className="text-2xl font-black">EDP</h1></Link>
           <ul className="flex flex-row items-center space-x-4">
+            <li>
+              <SignedIn>
+                <Label>
+                  <Link href="/rooms">Classes</Link>
+                </Label>
+              </SignedIn>
+            </li>
             <li>
               <SignedIn>
                 <Label>
