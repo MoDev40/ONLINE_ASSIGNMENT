@@ -16,14 +16,14 @@ const roomSLice = createApi({
 
     endpoints:(builder)=>({
 
-        getRooms:builder.query<TeacherClassRoom,string>({
-            query:(teacherId)=> `/api/rooms/${teacherId}`,
+        getRooms:builder.query<TeacherClassRoom[],string>({
+            query:(teacherId)=> `/rooms/${teacherId}`,
             providesTags:['room']
         }),
 
         createRoom:builder.mutation<ClassRoom,CreateUpdateRoom>({
             query:({teacherId,room})=>({
-                url:`/api/rooms/${teacherId}/create`,
+                url:`/rooms/${teacherId}/create`,
                 method: 'POST',
                 body:room
             }),
@@ -32,7 +32,7 @@ const roomSLice = createApi({
 
         updateRoom:builder.mutation<ClassRoom,CreateUpdateRoom>({
             query:({teacherId,room})=>({
-                url:`/api/rooms/${teacherId}/update`,
+                url:`/rooms/${teacherId}/update`,
                 method: 'PUT',
                 body:room
             }),
@@ -41,7 +41,7 @@ const roomSLice = createApi({
     
         deleteRoom:builder.mutation<string,DeleteRoomParams>({
             query:({roomId,teacherId})=>({
-                url:`/api/rooms/${roomId}/delete/${teacherId}`,
+                url:`/rooms/${roomId}/delete/${teacherId}`,
                 method: 'DELETE',
             }),
             invalidatesTags:['room']
@@ -49,3 +49,12 @@ const roomSLice = createApi({
         
     })
 })
+
+export default roomSLice
+
+export const {
+    useGetRoomsQuery,
+    useCreateRoomMutation,
+    useUpdateRoomMutation,
+    useDeleteRoomMutation,
+} = roomSLice;
