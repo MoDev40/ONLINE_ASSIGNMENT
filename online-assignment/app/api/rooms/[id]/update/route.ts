@@ -1,7 +1,7 @@
 import prisma from "@/lib/client";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req:NextRequest,{params}:{params:RouteParams}){
+export async function PUT(req:NextRequest,{params}:{params:RouteParams}){
     try {
 
         const { id } = params
