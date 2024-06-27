@@ -2,13 +2,13 @@
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import {
-    Tooltip,
-    TooltipContent,
-    TooltipTrigger,
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs"
 import { TooltipProvider } from "@radix-ui/react-tooltip"
-import { Home, Menu } from "lucide-react"
+import { Home, Menu, UserCircle, UsersIcon } from "lucide-react"
 import Link from "next/link"
 import React from 'react'
 
@@ -33,7 +33,7 @@ function Layout({ children }:{children:React.ReactNode}) {
             <Tooltip>
                 <TooltipTrigger asChild>
                   <Link
-                    href={'/rooms'}
+                    href='/'
                     className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                   >
                     <Home />
@@ -42,18 +42,41 @@ function Layout({ children }:{children:React.ReactNode}) {
                 </TooltipTrigger>
                 <TooltipContent side="right">Home</TooltipContent>
             </Tooltip>
+            <Tooltip>
+                <TooltipTrigger asChild>
+                  <Link
+                    href='/rooms'
+                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                  >
+                    <UsersIcon/>
+                    <span className="sr-only">Classes</span>
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent side="right">Classes</TooltipContent>
+            </Tooltip>
         </nav>
           <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-4">
+              <Tooltip>
+                    <TooltipTrigger asChild>
+                      <div
+                        className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                      >
+                        <UserCircle/>
+                        <span className="sr-only">Profile</span>
+                      </div>
+                    </TooltipTrigger>
+                    <TooltipContent side="right">Profile</TooltipContent>
+                </Tooltip>
                 <Tooltip>
                     <TooltipTrigger asChild>
                       <div
                         className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                       >
                         <UserButton afterSignOutUrl="/"/>
-                        <span className="sr-only">Profile</span>
+                        <span className="sr-only">Account</span>
                       </div>
                     </TooltipTrigger>
-                    <TooltipContent side="right">Profile</TooltipContent>
+                    <TooltipContent side="right">Account</TooltipContent>
                 </Tooltip>
           </nav>
         </TooltipProvider>
@@ -74,13 +97,31 @@ function Layout({ children }:{children:React.ReactNode}) {
             </Link>
               <ul className="flex flex-col space-y-5">
                     <li>
-                    <Link
-                    href="/"
-                    className="flex flex-row items-center space-x-4"
-                    >
-                    <Home/>
-                    <span>Home</span>
-                    </Link>
+                      <Link
+                      href="/"
+                      className="flex flex-row items-center space-x-4"
+                      >
+                      <Home/>
+                      <span>Home</span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                      href="/"
+                      className="flex flex-row items-center space-x-4"
+                      >
+                      <UsersIcon/>
+                      <span>Classes</span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                      href="/"
+                      className="flex flex-row items-center space-x-4"
+                      >
+                      <UserCircle/>
+                      <span>Profile</span>
+                      </Link>
                     </li>
                 </ul>
               </nav>
