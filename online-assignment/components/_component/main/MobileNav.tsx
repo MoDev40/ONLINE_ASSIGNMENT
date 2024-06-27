@@ -1,0 +1,87 @@
+"use client"
+import { Button } from "@/components/ui/button"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { useGetUserQuery } from "@/lib/features/userSlice"
+import { File, Home, Menu, Settings2, UserCircle, UsersIcon } from "lucide-react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+
+type MobileNavProps = {
+    userId: string;
+}
+const MobileNav = ({ userId }:MobileNavProps) => {
+    const { data:user,isLoading,isFetching } = useGetUserQuery(userId)
+    const pathName = usePathname()
+
+  return (
+    <Sheet>
+    <SheetTrigger asChild>
+      <Button size="icon" variant="outline" className="sm:hidden">
+        <Menu/>
+        <span className="sr-only">Toggle Menu</span>
+      </Button>
+    </SheetTrigger>
+    <SheetContent side="left" className="sm:max-w-xs">
+      <nav className="grid gap-6 text-lg font-medium">
+    <Link href="/" className="flex flex-row space-x-3 items-center" >
+      <h3 className="text-rose-600 text-xl font-black">EDP</h3>
+    </Link>
+      <ul className="flex flex-col space-y-5">
+            <li>
+              <Link
+              href="/"
+              className="flex flex-row items-center space-x-4"
+              >
+              <Home/>
+              <span>Home</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+              href={user?.role === "student" ? "/student-rooms" : "/rooms"}
+              className="flex flex-row items-center space-x-4"
+              >
+              <UsersIcon/>
+              <span>Classes</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+              href="/profile"
+              className="flex flex-row items-center space-x-4"
+              >
+              <UserCircle/>
+              <span>Profile</span>
+              </Link>
+            </li>
+            {
+                pathName !== "/rooms" && pathName !== "/profile" &&
+                <>
+
+                  <Link
+                    href=""
+                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                  >
+                    <File/>
+                    <span className="sr-only">Assignments</span>
+                  </Link>        
+
+
+                  <Link
+                    href=""
+                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                  >
+                    <Settings2/>
+                    <span className="sr-only">Setting</span>
+                  </Link>
+                </>
+
+            }
+        </ul>
+      </nav>
+    </SheetContent>
+  </Sheet>
+  )
+}
+
+export default MobileNav

@@ -1,9 +1,11 @@
-import Navbar from '@/components/_component/base/Navbar'
-import React from 'react'
+import Navbar from '@/components/_component/base/Navbar';
+import { auth } from '@clerk/nextjs/server';
+import React from 'react';
 
 function layout({children}:{
     children:React.ReactNode
 }) {
+  const { userId } : { userId: string | null } = auth();
   return (
     <div className="relative isolate w-full">
       <div
@@ -18,7 +20,7 @@ function layout({children}:{
           }}
         />
       </div>
-      <Navbar/>
+      <Navbar userId={userId as string} />
       {children}
       <div
         className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"

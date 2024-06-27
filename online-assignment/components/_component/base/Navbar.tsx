@@ -1,12 +1,32 @@
 "use client"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
+import { Skeleton } from "@/components/ui/skeleton"
+import { useGetUserQuery } from "@/lib/features/userSlice"
 import useScroll from "@/lib/scroll"
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs"
 import Link from "next/link"
 
-const Navbar = () => {
+type NavbarProps = {
+  userId:string;
+}
+
+const Navbar = ({ userId }:NavbarProps) => {
   const scrolled = useScroll(50);
+  const { data:user,isLoading,isFetching } = useGetUserQuery(userId)
+
+  if(isLoading || isFetching) {
+    return(
+    <section className="flex flex-row container p-4 mx-auto justify-between items-center">
+      <Skeleton className="w-24 h-8 rounded-md animate-pulse" /> 
+      <ul className="flex flex-row items-center space-x-4">
+        <Skeleton className="w-20 h-6 rounded-md animate-pulse" />
+        <Skeleton className="w-20 h-6 rounded-md animate-pulse" />
+        <Skeleton className=" w-20 rounded-md h-6  animate-pulse" />
+      </ul>
+    </section>
+    )
+  }
   return (
     <div
       className={`fixed top-0 w-full flex flex-col p-4 justify-between ${
@@ -21,7 +41,7 @@ const Navbar = () => {
             <li>
               <SignedIn>
                 <Label>
-                  <Link href="/rooms">Classes</Link>
+                  <Link href={user?.role === "student" ? "/student-rooms" : "/rooms"}>Classes</Link>
                 </Label>
               </SignedIn>
             </li>
