@@ -1,7 +1,7 @@
 "use client"
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { useGetRoomQuery } from "@/lib/features/roomSlice"
 import Loading from "../../Loading"
-import { Card,CardHeader,CardTitle,CardContent,CardDescription } from "@/components/ui/card"
 
 type RoomPageCard = {
     room_id:string
