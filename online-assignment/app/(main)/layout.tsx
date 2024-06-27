@@ -58,12 +58,12 @@ function Layout({ children }:{children:React.ReactNode}) {
           <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-4">
               <Tooltip>
                     <TooltipTrigger asChild>
-                      <div
+                      <Link href='/profile'
                         className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                       >
                         <UserCircle/>
                         <span className="sr-only">Profile</span>
-                      </div>
+                      </Link>
                     </TooltipTrigger>
                     <TooltipContent side="right">Profile</TooltipContent>
                 </Tooltip>
@@ -107,7 +107,7 @@ function Layout({ children }:{children:React.ReactNode}) {
                     </li>
                     <li>
                       <Link
-                      href="/"
+                      href="/rooms"
                       className="flex flex-row items-center space-x-4"
                       >
                       <UsersIcon/>
@@ -116,7 +116,7 @@ function Layout({ children }:{children:React.ReactNode}) {
                     </li>
                     <li>
                       <Link
-                      href="/"
+                      href="/profile"
                       className="flex flex-row items-center space-x-4"
                       >
                       <UserCircle/>
