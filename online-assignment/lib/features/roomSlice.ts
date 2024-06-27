@@ -1,4 +1,4 @@
-import { createApi,fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_URL } from "../baseUrl";
 
 type DeleteRoomParams = {
@@ -38,7 +38,12 @@ const roomSLice = createApi({
             }),
             invalidatesTags:['room']
         }),
-    
+
+        getRoom:builder.query<ClassRoom,string>({
+            query:(id)=> `/rooms/${id}/room`,
+            providesTags:["room"]
+        }),
+
         deleteRoom:builder.mutation<string,DeleteRoomParams>({
             query:({roomId,teacherId})=>({
                 url:`/rooms/${roomId}/delete/${teacherId}`,
@@ -57,4 +62,5 @@ export const {
     useCreateRoomMutation,
     useUpdateRoomMutation,
     useDeleteRoomMutation,
+    useGetRoomQuery,
 } = roomSLice;
