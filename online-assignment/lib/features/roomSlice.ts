@@ -1,9 +1,17 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_URL } from "../baseUrl";
 
-type DeleteRoomParams = {
+type DeleteOrLeaveRoomParams = {
     roomId: string;
-    teacherId: string;
+    // teacherId: string; or StudentId: string;
+    [key:string]: string;
+}
+
+type JoinRoom = {
+    student_id: string;
+    data:{
+        joinCode: string;
+    }
 }
 
 const roomSLice = createApi({
@@ -40,16 +48,16 @@ const roomSLice = createApi({
         }),
 
         getRoom:builder.query<ClassRoom,string>({
-            query:(id)=> `/rooms/${id}/room`,
+            query:(room_id)=> `/rooms/${room_id}/room`,
             providesTags:["room"]
         }),
 
         getRoomUsers:builder.query<RoomUsers[],string>({
-            query:(id)=> `/rooms/${id}/users`,
+            query:(room_id)=> `/rooms/${room_id}/users`,
             providesTags:["room"]
         }),
         
-        deleteRoom:builder.mutation<string,DeleteRoomParams>({
+        deleteRoom:builder.mutation<string,DeleteOrLeaveRoomParams>({
             query:({roomId,teacherId})=>({
                 url:`/rooms/${roomId}/delete/${teacherId}`,
                 method: 'DELETE',
@@ -57,17 +65,26 @@ const roomSLice = createApi({
             invalidatesTags:['room']
         }),
 
-        joinRoom:builder.mutation<StudentRoom,string>({
-            query:(student_id)=>({
+        joinRoom:builder.mutation<StudentRoom,JoinRoom>({
+            query:({ student_id,data })=>({
                 url:`/rooms/${student_id}/join`,
                 method: 'POST',
+                body:data
             }),
             invalidatesTags:["room"]
         }),
 
         getStudentRooms:builder.query<StudentRoomsWithAssignments,string>({
-            query:(id)=> `/rooms/${id}/student-class`,
+            query:(student_id)=> `/rooms/${student_id}/student-class`,
             providesTags:["room"]
+        }),
+
+        leaveRoom:builder.mutation<string,DeleteOrLeaveRoomParams>({
+            query:({roomId,student_id})=>({
+                url:`/rooms/${roomId}/leave/${student_id}`,
+                method:"DELETE",
+            }),
+            invalidatesTags:["room"]
         })
         
     })
@@ -83,5 +100,6 @@ export const {
     useGetRoomQuery,
     useGetRoomUsersQuery,
     useGetStudentRoomsQuery,
-    useJoinRoomMutation
+    useJoinRoomMutation,
+    useLeaveRoomMutation,
 } = roomSLice;
