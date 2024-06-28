@@ -1,7 +1,10 @@
 "use client"
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { useGetRoomQuery } from "@/lib/features/roomSlice"
 import Loading from "../../Loading"
+import RoomUsers from "./RoomUsers"
+import { Separator } from "@/components/ui/separator"
+import { cn } from "@/lib/utils"
 
 type RoomPageCard = {
     room_id:string
@@ -15,11 +18,15 @@ const RoomPageCard = ({ room_id }:RoomPageCard)=>{
     if(!room) return <h1>Not found</h1>
 
     return(
-        <Card>
+        <Card className="w-full">
             <CardHeader>
                 <CardTitle>{room.name}</CardTitle>
-                <CardDescription>{new Date(room.createdAt).toString()}</CardDescription>
+                <CardDescription>{new Date(room.createdAt).toLocaleDateString()}</CardDescription>
             </CardHeader>
+            <Separator/>
+            <CardContent className="p-5">
+                <RoomUsers room_id={room.id}/>
+            </CardContent>
         </Card>
     )
 }
