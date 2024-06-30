@@ -7,18 +7,17 @@ import {
 import { useGetUserQuery } from "@/lib/features/userSlice"
 import { UserButton } from "@clerk/nextjs"
 import { TooltipProvider } from "@radix-ui/react-tooltip"
-import { File, Home, Settings2, UserCircle, UsersIcon } from "lucide-react"
+import { File, Folder, Home, Settings2 } from "lucide-react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { useParams } from "next/navigation"
 
 type DeskNavProps = {
     userId: string;
 }
 
 const DeskNav = ({ userId }:DeskNavProps) => {
-    const { data:user,isLoading,isFetching } = useGetUserQuery(userId)
-    const pathName = usePathname()
-    
+    const { data:user } = useGetUserQuery(userId)
+    const params = useParams()   
   return (
     <TooltipProvider>
     <nav className="flex flex-col items-center gap-4 px-2 sm:py-4">
@@ -42,22 +41,19 @@ const DeskNav = ({ userId }:DeskNavProps) => {
         <Tooltip>
             <TooltipTrigger asChild>
               <Link
-                href={user?.role === "student" ? "/student-rooms" : "/rooms"}
+                href={user&& user?.role === "student" ? "/student-classes" : "/rooms"}
                 className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               >
-                <UsersIcon/>
+                <Folder/>
                 <span className="sr-only">Classes</span>
               </Link>
             </TooltipTrigger>
             <TooltipContent side="right">Classes</TooltipContent>
         </Tooltip>
-        {
-          pathName !== "/rooms" && pathName !== "/profile" &&
-          <>
             <Tooltip>
             <TooltipTrigger asChild>
               <Link
-                href=""
+                href={user&& user.role === "student" ? `/student-classes/assignments/${params.c_id || params.id }` : ""}
                 className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               >
                 <File/>
@@ -69,7 +65,7 @@ const DeskNav = ({ userId }:DeskNavProps) => {
             <Tooltip>
             <TooltipTrigger asChild>
               <Link
-                href=""
+                href={user&& user.role === "student" ? `/student-classes/setting/${params.c_id || params.id }` : ""}
                 className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               >
                 <Settings2/>
@@ -78,21 +74,8 @@ const DeskNav = ({ userId }:DeskNavProps) => {
             </TooltipTrigger>
             <TooltipContent side="right">Setting</TooltipContent>
             </Tooltip>
-          </>
-        }
     </nav>
     <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-4">
-          <Tooltip>
-                <TooltipTrigger asChild>
-                  <Link href='/profile'
-                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                  >
-                    <UserCircle/>
-                    <span className="sr-only">Profile</span>
-                  </Link>
-                </TooltipTrigger>
-                <TooltipContent side="right">Profile</TooltipContent>
-            </Tooltip>
             <Tooltip>
                 <TooltipTrigger asChild>
                   <div

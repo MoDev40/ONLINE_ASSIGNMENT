@@ -7,7 +7,7 @@ import Link from "next/link"
 
 const StudentClassCard = ({ room }:{ room:ClassroomWithAssignments}) => {
   return (
-    <Link href={`/rooms/${room.id}`}>
+    <Link href={`/student-classes/${room.id}`}>
     <Card>
         <CardHeader>
             <CardTitle>

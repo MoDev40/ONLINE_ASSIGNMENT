@@ -2,16 +2,16 @@
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { useGetUserQuery } from "@/lib/features/userSlice"
-import { File, Home, Menu, Settings2, UserCircle, UsersIcon } from "lucide-react"
+import { File, Home, Menu, Settings2, Folder } from "lucide-react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { useParams } from "next/navigation"
 
 type MobileNavProps = {
     userId: string;
 }
 const MobileNav = ({ userId }:MobileNavProps) => {
-    const { data:user,isLoading,isFetching } = useGetUserQuery(userId)
-    const pathName = usePathname()
+    const { data:user } = useGetUserQuery(userId)
+    const params = useParams()   
 
   return (
     <Sheet>
@@ -38,45 +38,32 @@ const MobileNav = ({ userId }:MobileNavProps) => {
             </li>
             <li>
               <Link
-              href={user?.role === "student" ? "/student-rooms" : "/rooms"}
+              href={user&& user?.role === "student" ? "/student-classes" : "/rooms"}
               className="flex flex-row items-center space-x-4"
               >
-              <UsersIcon/>
+              <Folder/>
               <span>Classes</span>
               </Link>
             </li>
             <li>
               <Link
-              href="/profile"
-              className="flex flex-row items-center space-x-4"
+              href={user&& user.role === "student" ? `/student-classes/assignments/${params.c_id || params.id }` : ""}
+              className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               >
-              <UserCircle/>
-              <span>Profile</span>
+                <File/>
+                <span className="sr-only">Assignments</span>
+              </Link>        
+            </li>
+            <li>
+
+              <Link
+              href={user&& user.role === "student" ? `/student-classes/setting/${params.c_id || params.id }` : ""}
+              className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+              >
+                <Settings2/>
+                <span className="sr-only">Setting</span>
               </Link>
             </li>
-            {
-                pathName !== "/rooms" && pathName !== "/profile" &&
-                <>
-
-                  <Link
-                    href=""
-                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                  >
-                    <File/>
-                    <span className="sr-only">Assignments</span>
-                  </Link>        
-
-
-                  <Link
-                    href=""
-                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                  >
-                    <Settings2/>
-                    <span className="sr-only">Setting</span>
-                  </Link>
-                </>
-
-            }
         </ul>
       </nav>
     </SheetContent>
