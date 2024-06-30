@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import { Button } from '@/components/ui/button'
 import {
     Form,
     FormControl,
@@ -8,14 +8,13 @@ import {
     FormLabel,
     FormMessage
 } from "@/components/ui/form"
-import { z } from 'zod'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { Loader2 } from 'lucide-react'
 import { useJoinRoomMutation } from '@/lib/features/roomSlice'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Loader2 } from 'lucide-react'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
+import { z } from 'zod'
 
 const formSchema = z.object({
     joinCode: z.string()
@@ -52,7 +51,7 @@ const JoinRoomForm = ({ student_id }: JoinRoomFormProps) => {
 
   return (
     <Form {...form}>
-    <form onSubmit={form.handleSubmit(onSubmit)} className="gap-2 space-y-4">
+    <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-3 w-full">
             <FormField
             control={form.control}
             name="joinCode"
@@ -60,13 +59,13 @@ const JoinRoomForm = ({ student_id }: JoinRoomFormProps) => {
                 <FormItem>
                 <FormLabel/>
                 <FormControl>
-                    <Input type="text" placeholder="joinCode" {...field} />
+                    <Input className='w-full' type="text" placeholder="JoinCode" {...field} />
                 </FormControl>
                 <FormMessage />
                 </FormItem>
             )}
             />
-            <Button type="submit" className="w-full">{isLoading ? <Loader2 className="animate-spin"/> : "join"}</Button>
+            <Button className='w-full' type="submit" >{isLoading ? <Loader2 className="animate-spin"/> : "join"}</Button>
     </form>
     </Form>  
     )
