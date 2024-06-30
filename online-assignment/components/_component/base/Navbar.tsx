@@ -41,7 +41,7 @@ const Navbar = ({ userId }:NavbarProps) => {
             <li>
               <SignedIn>
                 <Label>
-                  <Link href={user?.role === "student" ? "/student-classes" : "/rooms"}>Classes</Link>
+                  <Link href={user?.role === "student" ? "/student-classes" : "/teacher-classes"}>Classes</Link>
                 </Label>
               </SignedIn>
             </li>

@@ -12,7 +12,7 @@ const RoomsCard = ({ userId }:{ userId:string })=> {
     if(isLoading || isFetching) return <div className="container mx-auto"><Loading/></div>
 
     return(
-        <div className="flex flex-col justify-center gap-4">
+        <div className="flex flex-col container mx-auto p-5 justify-center">
             <div className="flex flex-row justify-between items-center">
                 <h1 className="text-2xl font-bold">Rooms</h1>
                 <CreateRoomDialog teacherId={user?.id as string}/>
