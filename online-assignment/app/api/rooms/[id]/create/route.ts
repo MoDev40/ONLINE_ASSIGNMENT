@@ -14,7 +14,7 @@ export async function POST(req:NextRequest,{params}:{params:RouteParams}){
             }
         })
         
-        if(!teacher || teacher.role === 'teacher'){
+        if(!teacher || teacher.role !== 'teacher'){
             return NextResponse.json({message:"Unable to find teacher or an authorized user"},{status:401})
         }
 

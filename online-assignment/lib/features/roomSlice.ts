@@ -74,7 +74,7 @@ const roomSLice = createApi({
             invalidatesTags:["room"]
         }),
 
-        getStudentRooms:builder.query<StudentRoomsWithAssignments,string>({
+        getStudentRooms:builder.query<StudentRoomsWithAssignments[],string>({
             query:(student_id)=> `/rooms/${student_id}/student-class`,
             providesTags:["room"]
         }),
