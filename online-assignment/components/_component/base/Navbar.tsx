@@ -36,7 +36,9 @@ const Navbar = ({ userId }:NavbarProps) => {
       } z-30 transition-all`}
       >
         <section className="flex flex-row justify-between items-center">
-          <Link href='/'><h1 className="text-2xl font-black">EDP</h1></Link>
+          <Link href='/'>
+            <h1 className="relative flex flex-row items-baseline text-2xl font-bold"><span className="sr-only">EDP</span><span className="tracking-tight hover:cursor-pointer">ED<span className="text-primary">P</span></span><sup className="absolute left-[calc(100%+.1rem)] top-0 text-xs font-bold text-black">[BETA]</sup></h1>
+          </Link>
           <ul className="flex flex-row items-center space-x-4">
             <li>
               <SignedIn>
