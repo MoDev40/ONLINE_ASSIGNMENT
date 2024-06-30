@@ -1,32 +1,48 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { useGetRoomUsersQuery } from "@/lib/features/roomSlice";
+import { useRouter } from "next/navigation";
 import Loading from "../../Loading";
-import AvatarCard from "../../AvatarCard";
-import { cn } from "@/lib/utils";
+
 
 type RoomUsersProps = {
     room_id:string;
 }
 const RoomUsers = ({ room_id }:RoomUsersProps) => {
-    const { data:roomWithUsers, isFetching , isLoading } = useGetRoomUsersQuery(room_id)
+    const router = useRouter()
+    const { data:roomUsers, isFetching , isLoading } = useGetRoomUsersQuery(room_id)
     if(isLoading || isFetching) return <div className="container mx-auto"><Loading/></div>
   return (
-    roomWithUsers&&
-    roomWithUsers.map((room) => (
-      <Card key={room.id} className={
-        cn(
-          "flex flex-row justify-between shadow-sm h-auto items-center gap-2",
-        )
-      }>
-        <CardHeader>
-          <CardTitle>{room.user.name}</CardTitle>
-          <CardDescription>{room.user.idCard}</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <AvatarCard fallback={room.user.name?.charAt(0) as string}/>
-        </CardContent>
-      </Card>
-    ))
+    <Table>
+      <TableCaption>A list of joined users.</TableCaption>
+      <TableHeader>
+        <TableRow>
+          <TableHead className="w-[100px]">ID</TableHead>
+          <TableHead>Name</TableHead>
+          <TableHead>Class</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {
+          roomUsers&&
+          roomUsers.map((room) => (
+          <TableRow onClick={()=> router.push(`/student/${room.user.id}/details/${room.classroomId}`)} key={room.userId}>
+            <TableCell className="font-medium">{room.user.idCard}</TableCell>
+            <TableCell>{room.user.name}</TableCell>
+            <TableCell>{room.user.className}</TableCell>
+          </TableRow>
+          ))
+        }
+
+      </TableBody>
+    </Table>
   )
 }
 
