@@ -20,7 +20,7 @@ const Navbar = ({ userId }:NavbarProps) => {
     <section className="flex flex-row container p-4 mx-auto justify-between items-center">
       <Skeleton className="w-24 h-8 rounded-md animate-pulse" /> 
       <ul className="flex flex-row items-center space-x-4">
-        <Skeleton className="w-20 h-6 rounded-md animate-pulse" />
+        <Skeleton className="w-20 hidden lg:inline h-6 rounded-md animate-pulse" />
         <Skeleton className="w-20 h-6 rounded-md animate-pulse" />
         <Skeleton className=" w-20 rounded-md h-6  animate-pulse" />
       </ul>
@@ -41,7 +41,7 @@ const Navbar = ({ userId }:NavbarProps) => {
             <li>
               <SignedIn>
                 <Label>
-                  <Link href={user?.role === "student" ? "/student-rooms" : "/rooms"}>Classes</Link>
+                  <Link href={user?.role === "student" ? "/student-classes" : "/rooms"}>Classes</Link>
                 </Label>
               </SignedIn>
             </li>
