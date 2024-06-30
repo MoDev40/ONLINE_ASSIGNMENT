@@ -1,24 +1,20 @@
 "use client"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { cn } from '@/lib/utils'
-import LeaveRoomForm from './LeaveRoomForm'
 import { useGetUserQuery } from '@/lib/features/userSlice'
-import Loading from '../../Loading'
+import { cn } from '@/lib/utils'
+import Loading from './Loading'
+import LeaveOrDeleteRoomForm from './LeaveOrDeleteRoomForm'
 
-type StudentClassSettingProps = {
-  student_id: string;
+type ClassRoomSettingsProps = {
+  user_id: string;
   room_id: string;
+  action:string;
 }
 
-const StudentClassSetting = ({ student_id,room_id }:StudentClassSettingProps) => {
-  const { data:user , isLoading , isFetching } = useGetUserQuery(student_id as string);
+const ClassRoomSettings = ({ user_id,room_id,action }:ClassRoomSettingsProps) => {
+  const { data:user , isLoading , isFetching } = useGetUserQuery(user_id as string);
 
   if(isLoading || isFetching) return <div className="container mx-auto"><Loading/></div>
-
-  if(user?.role === "teacher") {
-    window.location.pathname = "/"
-    return null
-  }
 
   return (
     <Card
@@ -26,13 +22,13 @@ const StudentClassSetting = ({ student_id,room_id }:StudentClassSettingProps) =>
     >
       <CardHeader>
         <CardTitle className="text-red-500 font-black text-2xl">Danger-Zone</CardTitle>
-        <CardDescription>Alert: If you leave the class, all of your files will be deleted</CardDescription>
+        <CardDescription>Alert: If you {action} the class, all of your files will be deleted</CardDescription>
       </CardHeader>
       <CardContent
       className={cn("flex gap-4 flex-col")}
       >
         <p className='text-sm'>This is a very dangerous feature. Are you sure you want to delete all your files in this class?</p>
-        <LeaveRoomForm student_id={ user?.id as string } room_id={ room_id } />
+        <LeaveOrDeleteRoomForm action={action} user_id={ user?.id as string } room_id={ room_id } />
       </CardContent>
       <CardFooter>
         <p className="mt-4">Note: This action cannot be undone.</p>
@@ -41,4 +37,4 @@ const StudentClassSetting = ({ student_id,room_id }:StudentClassSettingProps) =>
   )
 }
 
-export default StudentClassSetting
+export default ClassRoomSettings
