@@ -9,7 +9,7 @@ type RoomCardProps = {
 }
 const RoomCard = ({ room }:RoomCardProps) => {
   return (
-    <Link href={`/rooms/${room.id}`}>
+    <Link href={`/teacher-classes/${room.id}`}>
     <Card>
         <CardHeader>
             <CardTitle>

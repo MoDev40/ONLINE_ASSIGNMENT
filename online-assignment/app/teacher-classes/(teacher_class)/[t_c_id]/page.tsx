@@ -1,8 +1,8 @@
 import RoomPageCard from "@/components/_component/main/room/RoomPageCard"
 function RoomPage({ params }:{ params:RouteParams }) {
-  const { r_id } = params
+  const { t_c_id } = params
   return (
-    <RoomPageCard room_id={r_id}/>
+    <RoomPageCard room_id={t_c_id}/>
   )
 }
 

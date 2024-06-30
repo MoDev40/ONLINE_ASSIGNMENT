@@ -38,7 +38,7 @@ const MobileNav = ({ userId }:MobileNavProps) => {
             </li>
             <li>
               <Link
-              href={user&& user?.role === "student" ? "/student-classes" : "/rooms"}
+              href={user&& user?.role === "student" ? "/student-classes" : "/teacher-classes"}
               className="flex flex-row items-center space-x-4"
               >
               <Folder/>
