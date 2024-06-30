@@ -13,15 +13,15 @@ declare type UserData = {
     createdAt: Date;
 }
 
-declare type Assignments = {
+declare type Assignment = {
     id: string;
     title: string;
-    description: string | null;
+    description?: string ;
     fileUrl: string;
     fileKey: string;
-    classroomId: string;
+    classroomId?: string;
     dueDate: Date;
-    createdAt: Date;
+    createdAt?: Date;
 }
 
 declare type ClassRoom = {
@@ -65,5 +65,5 @@ declare interface StudentRoomsWithAssignments extends StudentRoom {
 }
 
 declare interface ClassroomWithAssignments extends ClassRoom {
-    assignments:Assignments[]
+    assignments:Assignment[]
 }
