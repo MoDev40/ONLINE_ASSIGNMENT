@@ -1,9 +1,13 @@
-import React from 'react'
+import Assignment from '@/components/_component/main/room/Assignment'
 
-function StudentClassAssignments({ params }:{ params : RouteParams }) {
+type Params = {
+  id: string[];
+  c_id:string;
+}
+function StudentClassAssignment({ params }:{ params : Params }) {
   return (
-    <div>StudentClassAssignments {JSON.stringify(params.id[0])}</div>
+    <Assignment assignment_id={params.id[0]} />
   )
 }
 
-export default StudentClassAssignments
+export default StudentClassAssignment
