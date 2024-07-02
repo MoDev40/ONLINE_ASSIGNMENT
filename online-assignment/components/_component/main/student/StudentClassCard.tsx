@@ -2,6 +2,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
+import { format } from "date-fns"
 import { File } from "lucide-react"
 import Link from "next/link"
 
@@ -14,7 +15,7 @@ const StudentClassCard = ({ room }:{ room:StudentRoomsWithAssignments}) => {
                 {room.classroom.name}
             </CardTitle>
             <CardDescription>
-                <Label>{new Date(room.joinedAt).toLocaleDateString()}</Label>
+                <Label>JoinedAt: {format(new Date(room.joinedAt),"PP")}</Label>
             </CardDescription>
         </CardHeader>
         <Separator/>
