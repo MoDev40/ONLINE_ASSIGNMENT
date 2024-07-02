@@ -164,7 +164,7 @@ const CreateAssignment = ({ room_id,user_id }:CreateAssignmentProps) => {
                 </FormItem>
             )}
             />
-            <Button type="submit">{ isLoading ? <Loader/> : "Save"}</Button>
+            <Button disabled={isLoading} type="submit">{ isLoading ? <Loader/> : "Save"}</Button>
         </form>
     </Form>
   )

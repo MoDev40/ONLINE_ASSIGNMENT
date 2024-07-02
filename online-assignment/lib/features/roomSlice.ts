@@ -100,6 +100,11 @@ const roomSLice = createApi({
                 method:"DELETE",
             }),
             invalidatesTags:["room"]
+        }),
+
+        getTeacherAssignments:builder.query<Assignment[],{room_id:string,teacher_id:string}>({
+            query:({room_id,teacher_id})=> `/rooms/${room_id}/assignments/${teacher_id}`,
+            providesTags:["room"]
         })
         
     })
@@ -118,4 +123,5 @@ export const {
     useGetStudentRoomsQuery,
     useJoinRoomMutation,
     useLeaveRoomMutation,
+    useGetTeacherAssignmentsQuery
 } = roomSLice;
