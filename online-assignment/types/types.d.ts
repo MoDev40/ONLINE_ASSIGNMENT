@@ -14,7 +14,7 @@ declare type UserData = {
 }
 
 declare type Assignment = {
-    id: string;
+    id?: string;
     title: string;
     description?: string ;
     fileUrl: string;

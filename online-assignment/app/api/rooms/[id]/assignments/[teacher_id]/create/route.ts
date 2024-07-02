@@ -38,7 +38,7 @@ export async function POST(req:NextRequest,{params}:{params:RouteParams}){
                 classroomId:classRoom.id,
                 title,
                 description,
-                dueDate:new Date(dueDate),
+                dueDate,
                 fileKey,
                 fileUrl,
                 createdAt:currentDate
