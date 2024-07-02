@@ -7,6 +7,12 @@ type DeleteOrLeaveRoomParams = {
     [key:string]: string;
 }
 
+interface AssignmentBody {
+    assignment: Assignment,
+    room_id: string;
+    teacher_id: string;
+}
+
 type JoinRoom = {
     student_id: string;
     data:{
@@ -56,6 +62,15 @@ const roomSLice = createApi({
             query:(room_id)=> `/rooms/${room_id}/users`,
             providesTags:["room"]
         }),
+
+        addAssignment:builder.mutation<Assignment,AssignmentBody>({
+            query:({assignment,room_id,teacher_id})=>({
+                url:`/rooms/${room_id}/assignments/${teacher_id}/create`,
+                method: 'POST',
+                body:assignment
+            }),
+            invalidatesTags:['room']
+        }),
         
         deleteRoom:builder.mutation<string,DeleteOrLeaveRoomParams>({
             query:({roomId,teacherId})=>({
@@ -94,6 +109,7 @@ export default roomSLice
 
 export const {
     useGetRoomsQuery,
+    useAddAssignmentMutation,
     useCreateRoomMutation,
     useUpdateRoomMutation,
     useDeleteRoomMutation,
