@@ -109,6 +109,10 @@ const roomSLice = createApi({
         getStudentAssignments:builder.query<Assignment[],{room_id:string,student_id:string}>({
             query:({room_id,student_id})=> `/rooms/${room_id}/student-class/assignments/${student_id}`,
             providesTags:["room"]
+        }),
+        getAssignment:builder.query<Assignment,string>({
+            query:(assignment_id)=> `/rooms/assignment/${assignment_id}`,
+            providesTags:["room"]
         })
         
     })
@@ -128,5 +132,6 @@ export const {
     useJoinRoomMutation,
     useLeaveRoomMutation,
     useGetTeacherAssignmentsQuery,
-    useGetStudentAssignmentsQuery
+    useGetStudentAssignmentsQuery,
+    useGetAssignmentQuery
 } = roomSLice;
