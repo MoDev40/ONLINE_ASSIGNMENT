@@ -54,7 +54,7 @@ const AssignmentsLists = ({ room_id,student_id }:AssignmentListsProps) => {
       {
         assignments&&
         assignments.map((assignment)=>(
-        <TableRow onClick={()=> router.push(`${pathName}/assignments/${assignment.id}/${user?.id}`)} key={assignment.id}>
+        <TableRow onClick={()=> router.push(`${pathName}/assignments/${assignment.id}/${assignment.classroomId}`)} key={assignment.id}>
           <TableCell className="font-medium">{assignment.title}</TableCell>
           <TableCell>{format(new Date(assignment.dueDate),"PP")}</TableCell>
           <TableCell><Link target="_blank"  href={assignment.fileUrl}>Link</Link></TableCell>

@@ -1,4 +1,4 @@
-import Assignment from '@/components/_component/main/room/Assignment'
+import AssignmentAndSubmitPage from "@/components/_component/main/student/AssignmentAndSubmitPage";
 
 type Params = {
   id: string[];
@@ -6,7 +6,7 @@ type Params = {
 }
 function StudentClassAssignment({ params }:{ params : Params }) {
   return (
-    <Assignment assignment_id={params.id[0]} />
+    <AssignmentAndSubmitPage assignment_id={params.id[0]} student_id={params.c_id} classroom_id={params.id[1]} />
   )
 }
 
