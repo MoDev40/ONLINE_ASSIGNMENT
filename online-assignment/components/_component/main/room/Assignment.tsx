@@ -1,11 +1,11 @@
 "use client"
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { useGetAssignmentQuery } from "@/lib/features/roomSlice";
-import Loading from "../../Loading";
-import Link from "next/link";
-import { format } from "date-fns";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { useGetAssignmentQuery } from "@/lib/features/roomSlice";
+import { download } from "@/utils/Download";
+import { format } from "date-fns";
+import Loading from "../../Loading";
 
 type AssignmentProps = {
   assignment_id:string;
@@ -22,15 +22,19 @@ const Assignment = ({ assignment_id }:AssignmentProps) => {
     >
       <CardHeader title={assignment?.title}>
         <CardTitle>{assignment?.title}</CardTitle>
-        <CardDescription>{assignment?.description}</CardDescription>
         <CardDescription>Due: {format(new Date(assignment?.dueDate),"PP")}</CardDescription>
       </CardHeader>
       <CardContent>
-        <h1>Download Resources</h1>
-        <Button variant="link"> 
-        <Link className="link" href={assignment?.fileUrl}>here</Link>
-        </Button>
+        <CardDescription>{assignment?.description ? assignment?.description : "No description provided"}</CardDescription>
       </CardContent>
+      <CardFooter>
+        <h1>Download Resources</h1>
+        <Button onClick={()=>{
+          download(assignment.fileUrl,`${assignment.title}.${assignment.fileUrl.split(".")[2]}`)
+        }} variant="link"> 
+          here
+        </Button>
+      </CardFooter>
     </Card>
   )
 }
