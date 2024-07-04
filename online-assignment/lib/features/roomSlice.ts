@@ -7,6 +7,15 @@ type DeleteOrLeaveRoomParams = {
     [key:string]: string;
 }
 
+type SubmitBody = {
+    student_id: string;
+    assignment_id: string;
+    classroom_id: string;
+    data:{
+        fileUrl: string;
+        fileKey: string;
+    }
+}
 interface AssignmentBody {
     assignment: Assignment,
     room_id: string;
@@ -113,8 +122,14 @@ const roomSLice = createApi({
         getAssignment:builder.query<Assignment,string>({
             query:(assignment_id)=> `/rooms/assignment/${assignment_id}`,
             providesTags:["room"]
+        }),
+        submitAssignmentAnswer:builder.mutation<SubmittedFile,SubmitBody>({
+            query:({ student_id,classroom_id,assignment_id,data })=>({
+                url:`/rooms/assignment/submit/${student_id}/${classroom_id}/${assignment_id}`,
+                method: 'POST',
+                body:data
+            })
         })
-        
     })
 })
 
@@ -133,5 +148,6 @@ export const {
     useLeaveRoomMutation,
     useGetTeacherAssignmentsQuery,
     useGetStudentAssignmentsQuery,
-    useGetAssignmentQuery
+    useGetAssignmentQuery,
+    useSubmitAssignmentAnswerMutation
 } = roomSLice;

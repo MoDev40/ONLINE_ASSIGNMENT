@@ -67,3 +67,13 @@ declare interface StudentRoomsWithAssignments extends StudentRoom {
 declare interface ClassroomWithAssignments extends ClassRoom {
     assignments:Assignment[]
 }
+
+declare type SubmittedFile = {
+    id: string;
+    assignmentId: string;
+    studentId: string;
+    classroomId: string;
+    fileUrl: string;
+    fileKey: string;
+    submittedAt: Date;
+}
