@@ -22,7 +22,7 @@ const AssignmentPageCard = ({ room_id, user_id }:PageCardProps) => {
   }
 
   return (
-    <Card className="flex flex-row gap-3 shadow-sm p-5 w-full">
+    <Card className="flex flex-col md:flex-row gap-3 shadow-sm p-5 w-full">
       <AssignmentList room_id={room_id} teacher_id={user?.id as string}/>
       <Separator orientation="vertical"/>
       <CreateAssignment room_id={room_id} user_id={user?.id as string}/>
