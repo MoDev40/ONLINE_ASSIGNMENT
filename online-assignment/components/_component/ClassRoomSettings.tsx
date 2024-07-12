@@ -1,9 +1,9 @@
 "use client"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { useGetUserQuery } from '@/lib/features/userSlice'
 import { cn } from '@/lib/utils'
-import Loading from './Loading'
 import LeaveOrDeleteRoomForm from './LeaveOrDeleteRoomForm'
+import Loading from './Loading'
 
 type ClassRoomSettingsProps = {
   user_id: string;
@@ -17,11 +17,11 @@ const ClassRoomSettings = ({ user_id,room_id,action }:ClassRoomSettingsProps) =>
   if(isLoading || isFetching) return <div className="container mx-auto"><Loading/></div>
 
   return (
-    <Card
-    className={cn("w-full")}
+    <div
+    className={cn("w-full ")}
     >
       <CardHeader>
-        <CardTitle className="text-red-500 font-black text-2xl">Danger-Zone</CardTitle>
+        <CardTitle className="text-red-500 font-black text-2xl">Danger Zone</CardTitle>
         <CardDescription>Alert: If you {action} the class, all of your files will be deleted</CardDescription>
       </CardHeader>
       <CardContent
@@ -33,7 +33,7 @@ const ClassRoomSettings = ({ user_id,room_id,action }:ClassRoomSettingsProps) =>
       <CardFooter>
         <p className="mt-4">Note: This action cannot be undone.</p>
       </CardFooter>
-    </Card>
+    </div>
   )
 }
 

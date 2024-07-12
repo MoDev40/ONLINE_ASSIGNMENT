@@ -51,7 +51,7 @@ const MobileNav = ({ userId }:MobileNavProps) => {
               className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               >
                 <File/>
-                <span className="sr-only">Assignments</span>
+                <span>Assignments</span>
               </Link>        
             </li>
             <li>
@@ -61,7 +61,7 @@ const MobileNav = ({ userId }:MobileNavProps) => {
               className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               >
                 <Settings2/>
-                <span className="sr-only">Setting</span>
+                <span>Setting</span>
               </Link>
             </li>
         </ul>
