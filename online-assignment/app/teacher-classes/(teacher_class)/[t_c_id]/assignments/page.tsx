@@ -1,7 +1,7 @@
 import AssignmentPageCard from "@/components/_component/main/room/AssignmentPageCard";
 import { auth } from "@clerk/nextjs/server";
 
-function AssignmentsPage({ params }:{ params:RouteParams }) {
+function AssignmentsPage({ params }:{ params:RouteParams}) {
   const { t_c_id } = params
   const { userId } : { userId: string | null } = auth();
   return (
