@@ -3,11 +3,14 @@ import { NextRequest, NextResponse } from "next/server";
 
 type Param = {
     list_id: string[]
+    id:string;
 }
 export async function POST(req:NextRequest,{ params }:{params:Param}) {
 
-    const [studentId,classroomId,assignmentId,] = params.list_id
+    const [studentId,assignmentId,] = params.list_id
     const { fileKey,fileUrl } = await req.json();
+
+    const { id } = params;
 
     const user = await prisma.userClassroom.findUnique({
         where:{
@@ -24,7 +27,7 @@ export async function POST(req:NextRequest,{ params }:{params:Param}) {
     }
 
 
-    if(classroomId !== user.classroom.id){
+    if(id !== user.classroom.id){
         return NextResponse.json({message:"classroom not found or user does not exist in classroom"},{status:404})
     }
 
@@ -37,7 +40,7 @@ export async function POST(req:NextRequest,{ params }:{params:Param}) {
         }
     })
     
-    if(!assignment || assignment.classroom.id !== classroomId){
+    if(!assignment || assignment.classroom.id !== id){
         return NextResponse.json({message:"Unable to find: assignment not found"},{status:404})
     }
 
@@ -45,7 +48,7 @@ export async function POST(req:NextRequest,{ params }:{params:Param}) {
         data:{
             studentId:user.id,
             assignmentId:assignment.id,
-            classroomId,
+            classroomId:id,
             fileKey,
             fileUrl
         }
