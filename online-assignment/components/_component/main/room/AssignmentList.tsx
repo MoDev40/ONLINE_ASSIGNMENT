@@ -1,4 +1,4 @@
-import { useGetTeacherAssignmentsQuery } from "@/lib/features/roomSlice";
+import { useGetAssignmentsQuery } from "@/lib/features/roomSlice";
 import Loading from "../../Loading";
 
 import {
@@ -11,18 +11,16 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { format } from "date-fns";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
 import { Trash2 } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
 type Props = {
   room_id:string;
-  teacher_id:string;
 }
 
-const AssignmentList = (props:Props) => {
-  const { data:assignments, isLoading, isFetching } = useGetTeacherAssignmentsQuery(props)
+const AssignmentList = ({ room_id }:Props) => {
+  const { data:assignments, isLoading, isFetching } = useGetAssignmentsQuery(room_id)
   const router = useRouter()
   const pathName = usePathname()
 
@@ -42,10 +40,12 @@ const AssignmentList = (props:Props) => {
       {
         assignments&&
         assignments.map((assignment)=>(
-        <TableRow onClick={()=> router.push(`${pathName}/${assignment.id}/`)} key={assignment.id}>
+        <TableRow key={assignment.id}>
           <TableCell className="font-medium">{assignment.title}</TableCell>
           <TableCell>{format(new Date(assignment.dueDate),"PP")}</TableCell>
-          <Trash2 size={20}/>
+          <TableCell> <Button size="sm"  variant="link" onClick={()=> router.push(`${pathName}/${assignment.id}/`)}>link</Button>
+          </TableCell>
+          <TableCell> <Trash2  size={20}/> </TableCell>
         </TableRow>
         ))
       }
