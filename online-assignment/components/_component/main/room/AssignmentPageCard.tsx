@@ -1,6 +1,4 @@
 "use client"
-import { Card } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 import { useGetUserQuery } from "@/lib/features/userSlice";
 import Loading from "../../Loading";
 import AssignmentList from "./AssignmentList";
@@ -22,11 +20,14 @@ const AssignmentPageCard = ({ room_id, user_id }:PageCardProps) => {
   }
 
   return (
-    <Card className="flex flex-col md:flex-row gap-3 shadow-sm p-5 w-full">
-      <AssignmentList room_id={room_id} teacher_id={user?.id as string}/>
-      <Separator orientation="vertical"/>
-      <CreateAssignment room_id={room_id} user_id={user?.id as string}/>
-    </Card>
+    <div className="grid grid-cols-1  md:grid-cols-2 gap-3 shadow-sm p-5 w-full">
+        <div>
+          <AssignmentList room_id={room_id} />
+        </div>
+        <div>
+          <CreateAssignment room_id={room_id} user_id={user?.id as string}/>
+        </div>
+    </div>
   )
 }
 
