@@ -1,5 +1,5 @@
 "use client"
-import { useGetStudentAssignmentsQuery } from "@/lib/features/roomSlice";
+import { useGetAssignmentsQuery } from "@/lib/features/roomSlice";
 import { useGetUserQuery } from "@/lib/features/userSlice";
 import Loading from "../../Loading";
 
@@ -23,14 +23,14 @@ type AssignmentListsProps = {
 }
 const AssignmentsLists = ({ room_id,student_id }:AssignmentListsProps) => {
     const { data:user,isFetching } = useGetUserQuery(student_id)
-    const { data:assignments,isLoading } = useGetStudentAssignmentsQuery({ room_id, student_id: user?.id as string})
+    const { data:assignments,isLoading } = useGetAssignmentsQuery(room_id)
 
     const router = useRouter()
     const pathName = usePathname()
 
     if(isFetching || isLoading) return <div className="container mx-auto"><Loading /></div>
   
-    if(user?.role === "teacher"){
+    if(user?.role !== "student"){
       window.location.pathname = "/"
       return null;
     }
