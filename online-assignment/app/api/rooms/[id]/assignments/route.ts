@@ -12,13 +12,19 @@ export async function GET(req:NextRequest,{params}:{params:RouteParams}){
             }
         })
 
-        if(!classRoom){
+        const userClassroom = await prisma.userClassroom.findUnique({
+            where:{
+                id
+            }
+        })
+
+        if(!classRoom && !userClassroom){
             return NextResponse.json({message:"Unable to find classRoom un expected error ocurred"},{status:404})
         }
 
         const assignments = await prisma.assignment.findMany({
             where:{
-                classroomId:classRoom.id
+                classroomId:classRoom?.id || userClassroom?.classroomId
             }
         })
         
