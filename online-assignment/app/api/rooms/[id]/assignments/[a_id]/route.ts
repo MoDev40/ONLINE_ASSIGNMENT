@@ -4,11 +4,11 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(req:NextRequest,{ params }:{params:RouteParams}){
     try {
 
-        const { id } = params
+        const { a_id } = params
 
         const assignment = await prisma.assignment.findUnique({
             where:{
-                id
+                id:a_id
             }
         })
 

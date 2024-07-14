@@ -116,12 +116,12 @@ const roomSLice = createApi({
             providesTags:["room"]
         }),
         getAssignment:builder.query<Assignment,string>({
-            query:(assignment_id)=> `/rooms/assignment/${assignment_id}`,
+            query:(assignment_id)=> `/rooms/${0}/assignments/${assignment_id}`,
             providesTags:["room"]
         }),
         submitAssignmentAnswer:builder.mutation<SubmittedFile,SubmitBody>({
             query:({ student_id,classroom_id,assignment_id,data })=>({
-                url:`/rooms/assignment/submit/${student_id}/${classroom_id}/${assignment_id}`,
+                url:`/rooms/${classroom_id}/assignments/submit/${student_id}/${assignment_id}`,
                 method: 'POST',
                 body:data
             })
