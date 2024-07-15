@@ -1,12 +1,11 @@
 "use client"
 import { useGetStudentRoomsQuery } from '@/lib/features/roomSlice'
 import { useGetUserQuery } from '@/lib/features/userSlice'
+import useScroll from '@/lib/scroll'
+import Link from 'next/link'
 import Loading from '../../Loading'
 import JoinRoomForm from '../room/JoinRoomForm'
 import StudentClassCard from './StudentClassCard'
-import useScroll from '@/lib/scroll'
-import { Home } from 'lucide-react'
-import Link from 'next/link'
 
 const StudentClassesCard = ({ userId }:{ userId:string }) => {
     const scrolled = useScroll(50);
@@ -17,6 +16,9 @@ const StudentClassesCard = ({ userId }:{ userId:string }) => {
     
     if(user?.role !== "student") {
         window.location.pathname = "/"
+        return null
+    }else if(user?.idCard === "" || user.name === "" || user.className === "") {
+        window.location.pathname = "/profile"
         return null
     }
     
