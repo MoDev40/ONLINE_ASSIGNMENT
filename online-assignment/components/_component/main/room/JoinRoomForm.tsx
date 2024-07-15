@@ -55,11 +55,11 @@ const JoinRoomForm = ({ student_id }: JoinRoomFormProps) => {
     <Dialog>
         <DialogTrigger asChild>
         {/* color='#f43f5e' */}
-        <Button size="icon" variant="outline"><FolderPlus /></Button>
+        <FolderPlus size={25} />
         </DialogTrigger>
     <DialogContent>
         <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col p-2 gap-3 w-full">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="grid flex-1 gap-2 space-y-4">
                 <FormField
                 control={form.control}
                 name="joinCode"

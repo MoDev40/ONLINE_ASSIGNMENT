@@ -14,7 +14,7 @@ const AssignmentPageCard = ({ room_id, user_id }:PageCardProps) => {
   
   if(isLoading || isFetching) return <div className="container mx-auto"><Loading /></div>
   
-  if(user?.role === "student"){
+  if(user?.role !== "teacher"){
     window.location.pathname = "/"
     return null;
   }

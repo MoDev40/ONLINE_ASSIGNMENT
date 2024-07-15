@@ -21,7 +21,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { useCreateRoomMutation } from "@/lib/features/roomSlice"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Loader2, PlusCircle, PlusIcon } from "lucide-react"
+import { FolderPlus, Loader2, PlusCircle, PlusIcon } from "lucide-react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 import { z } from "zod"
@@ -60,7 +60,7 @@ function CreateRoomDialog({ teacherId }: CreateRoomDialogProps) {
     return (
         <Dialog>
           <DialogTrigger asChild>
-          <PlusCircle size={25}/>
+            <FolderPlus size={25}/>
           </DialogTrigger>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
