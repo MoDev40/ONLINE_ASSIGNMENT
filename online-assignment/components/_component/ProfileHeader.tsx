@@ -15,7 +15,7 @@ type ProfileHeaderProps = {
 }
 const ProfileHeader = ({ user }:ProfileHeaderProps) => {
   return (
-    <Card>
+    <Card className="rounded-b-none shadow-sm">
         <CardHeader className={cn(
             "flex flex-col items-center justify-center text-center"
         )}>
