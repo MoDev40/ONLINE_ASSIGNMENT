@@ -1,5 +1,6 @@
 "use client"
 import { Button } from '@/components/ui/button'
+import { Dialog, DialogClose, DialogContent, DialogFooter, DialogTrigger } from '@/components/ui/dialog'
 import {
     Form,
     FormControl,
@@ -11,7 +12,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { useJoinRoomMutation } from '@/lib/features/roomSlice'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Loader2 } from 'lucide-react'
+import { FolderPlus, Loader2 } from 'lucide-react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { z } from 'zod'
@@ -49,25 +50,41 @@ const JoinRoomForm = ({ student_id }: JoinRoomFormProps) => {
         });
     }
 
+
   return (
-    <Form {...form}>
-    <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-3 w-full">
-            <FormField
-            control={form.control}
-            name="joinCode"
-            render={({ field }) => (
-                <FormItem>
-                <FormLabel/>
-                <FormControl>
-                    <Input className='w-full' type="text" placeholder="JoinCode" {...field} />
-                </FormControl>
-                <FormMessage />
-                </FormItem>
-            )}
-            />
-            <Button className='w-full' type="submit" >{isLoading ? <Loader2 className="animate-spin"/> : "join"}</Button>
-    </form>
-    </Form>  
+    <Dialog>
+        <DialogTrigger asChild>
+        {/* color='#f43f5e' */}
+        <Button size="icon" variant="outline"><FolderPlus /></Button>
+        </DialogTrigger>
+    <DialogContent>
+        <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col p-2 gap-3 w-full">
+                <FormField
+                control={form.control}
+                name="joinCode"
+                render={({ field }) => (
+                    <FormItem>
+                    <FormLabel/>
+                    <FormControl>
+                        <Input className='w-full' type="text" placeholder="JoinCode" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                    </FormItem>
+                )}
+                />
+                <Button className='w-full' type="submit" >{isLoading ? <Loader2 className="animate-spin"/> : "join"}</Button>
+        </form>
+        </Form>
+        <DialogFooter className="sm:justify-start">
+          <DialogClose asChild>
+            <Button type="button" variant="secondary">
+              Close
+            </Button>
+          </DialogClose>
+        </DialogFooter> 
+    </DialogContent>
+    </Dialog>
     )
 }
 
