@@ -35,9 +35,7 @@ const StudentClassesCard = ({ userId }:{ userId:string }) => {
             <Link href='/'>
               <h1 className="relative flex flex-row items-baseline text-2xl font-bold"><span className="sr-only">EDP</span><span className="tracking-tight hover:cursor-pointer">ED<span className="text-primary">P</span></span><sup className="absolute left-[calc(100%+.1rem)] top-0 text-xs font-bold text-black">[BETA]</sup></h1>
             </Link>
-            <ul className="flex flex-row items-center space-x-4">
-                <li><JoinRoomForm student_id={user?.id} /></li>
-            </ul>
+            <JoinRoomForm student_id={user?.id} />
           </section>
         </div>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 container mx-auto xl:grid-cols-4 mt-6 lg:grid-cols-3">
