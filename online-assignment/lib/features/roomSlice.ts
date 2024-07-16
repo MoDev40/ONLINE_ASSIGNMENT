@@ -125,7 +125,11 @@ const roomSLice = createApi({
                 method: 'POST',
                 body:data
             })
-        })
+        }),
+        getSubmitedFiles:builder.query<SubmittedFile[],{ assignment_id:string; student_id:string; }>({
+            query:({assignment_id,student_id})=> `/rooms/submitedfiles/${assignment_id}/${student_id}`,
+            providesTags:["room"]
+        }),
     })
 })
 
@@ -144,5 +148,6 @@ export const {
     useLeaveRoomMutation,
     useGetAssignmentsQuery,
     useGetAssignmentQuery,
-    useSubmitAssignmentAnswerMutation
+    useSubmitAssignmentAnswerMutation,
+    useGetSubmitedFilesQuery
 } = roomSLice;

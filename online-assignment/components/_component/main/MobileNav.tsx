@@ -47,11 +47,11 @@ const MobileNav = ({ userId }:MobileNavProps) => {
             </li>
             <li>
               <Link
-              href={user&& user.role === "student" ? `/student-classes/${ params.c_id }/assignments` : `/teacher-classes/${params.t_c_id}/assignments`}
+              href={user&& user.role === "student" ? `/student-classes/${ params.c_id }/submitedfiles` : `/teacher-classes/${params.t_c_id}/assignments`}
               className="flex flex-row items-center space-x-4"
               >
                 <File/>
-                <span>Assignments</span>
+                <span>{user&& user.role === "student" ? "submitedfiles" :"Assignments"}</span>
               </Link>        
             </li>
             <li>
