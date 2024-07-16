@@ -53,14 +53,14 @@ const DeskNav = ({ userId }:DeskNavProps) => {
             <Tooltip>
             <TooltipTrigger asChild>
               <Link
-                href={user&& user.role === "student" ? `/student-classes/assignments/${params.c_id}` : `/teacher-classes/${params.t_c_id}/assignments`}
+                href={user&& user.role === "student" ? `/student-classes/${ params.c_id }/submitedfiles` : `/teacher-classes/${params.t_c_id}/assignments`}
                 className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               >
                 <File/>
-                <span className="sr-only">Assignments</span>
+                <span className="sr-only">{user&& user.role === "student" ? "submitedfiles" :"Assignments"}</span>
               </Link>
             </TooltipTrigger>
-            <TooltipContent side="right">Assignments</TooltipContent>
+            <TooltipContent side="right">{user&& user.role === "student" ? "submitedfiles" :"Assignments"}</TooltipContent>
             </Tooltip>
             <Tooltip>
             <TooltipTrigger asChild>
