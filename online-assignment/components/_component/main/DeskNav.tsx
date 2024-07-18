@@ -7,7 +7,7 @@ import {
 import { useGetUserQuery } from "@/lib/features/userSlice"
 import { UserButton } from "@clerk/nextjs"
 import { TooltipProvider } from "@radix-ui/react-tooltip"
-import { File, Folder, Home, Settings2 } from "lucide-react"
+import { File, FolderTree, Home, Settings2 } from "lucide-react"
 import Link from "next/link"
 import { useParams } from "next/navigation"
 
@@ -22,7 +22,7 @@ const DeskNav = ({ userId }:DeskNavProps) => {
     <TooltipProvider>
     <nav className="flex flex-col items-center gap-4 px-2 sm:py-4">
       <Link
-        href="/"
+        href={user&& user.role === "student" ? `/student-classes/${ params.c_id }` : `/teacher-classes/${params.t_c_id}`}
       >
         <h1 className='font-black'>EDP</h1>
       </Link>
@@ -44,8 +44,8 @@ const DeskNav = ({ userId }:DeskNavProps) => {
                 href={user&& user?.role === "student" ? "/student-classes" : "/teacher-classes"}
                 className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               >
-                <Folder/>
-                <span className="sr-only">Classes</span>
+              <FolderTree/>
+              <span className="sr-only">Classes</span>
               </Link>
             </TooltipTrigger>
             <TooltipContent side="right">Classes</TooltipContent>
