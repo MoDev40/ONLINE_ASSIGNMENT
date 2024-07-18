@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useGetRoomUsersQuery } from "@/lib/features/roomSlice";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Loading from "../../Loading";
 
 
@@ -17,6 +17,7 @@ type RoomUsersProps = {
 }
 const RoomUsers = ({ room_id }:RoomUsersProps) => {
     const router = useRouter()
+    const pathName = usePathname()
     const { data:roomUsers, isFetching , isLoading } = useGetRoomUsersQuery(room_id)
     if(isLoading || isFetching) return <div className="container mx-auto"><Loading/></div>
   return (
@@ -32,11 +33,11 @@ const RoomUsers = ({ room_id }:RoomUsersProps) => {
       <TableBody>
         {
           roomUsers&&
-          roomUsers.map((room) => (
-          <TableRow onClick={()=> router.push(`/student/${room.user.id}/details/${room.classroomId}`)} key={room.userId}>
-            <TableCell className="font-medium">{room.user.idCard}</TableCell>
-            <TableCell>{room.user.name}</TableCell>
-            <TableCell>{room.user.className}</TableCell>
+          roomUsers.map((user) => (
+          <TableRow onClick={()=> router.push(`${pathName}/submitedfiles/${user.id}`)} key={user.userId}>
+            <TableCell className="font-medium">{user.user.idCard}</TableCell>
+            <TableCell>{user.user.name}</TableCell>
+            <TableCell>{user.user.className}</TableCell>
           </TableRow>
           ))
         }
