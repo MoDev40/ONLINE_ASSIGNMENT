@@ -60,14 +60,14 @@ function CreateRoomDialog({ teacherId }: CreateRoomDialogProps) {
     return (
         <Dialog>
           <DialogTrigger asChild>
-            <FolderPlus size={25}/>
+            <Button size="sm">Create</Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
-              <DialogTitle>Create room</DialogTitle>
+              <DialogTitle>Create new room</DialogTitle>
             </DialogHeader>
                 <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="grid flex-1 gap-2 space-y-4">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="w-full grid flex-1 gap-2 space-y-4">
                         <FormField
                         control={form.control}
                         name="name"
