@@ -16,6 +16,12 @@ type SubmitBody = {
         fileKey: string;
     }
 }
+type deleteAssignment = {
+    teacher_id: string;
+    assignment_id: string;
+    classroom_id: string;
+}
+
 interface AssignmentBody {
     assignment: Assignment,
     room_id: string;
@@ -130,6 +136,13 @@ const roomSLice = createApi({
             query:({assignment_id,student_id})=> `/rooms/submitedfiles/${assignment_id}/${student_id}`,
             providesTags:["room"]
         }),
+        deleteAssignment:builder.mutation<string,deleteAssignment>({
+            query:({classroom_id,teacher_id,assignment_id})=>({
+                method:"DELETE",
+                url:`/rooms/${classroom_id}/assignments/delete/${teacher_id}/${assignment_id}`,
+            }),
+            invalidatesTags:["room"]
+        })
     })
 })
 
@@ -149,5 +162,6 @@ export const {
     useGetAssignmentsQuery,
     useGetAssignmentQuery,
     useSubmitAssignmentAnswerMutation,
-    useGetSubmitedFilesQuery
+    useGetSubmitedFilesQuery,
+    useDeleteAssignmentMutation
 } = roomSLice;
