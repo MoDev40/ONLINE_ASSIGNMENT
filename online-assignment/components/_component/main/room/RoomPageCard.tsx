@@ -1,10 +1,10 @@
 "use client"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Separator } from "@/components/ui/separator"
 import { useGetRoomQuery } from "@/lib/features/roomSlice"
 import Loading from "../../Loading"
+import UpdateRoom from "../rooms/UpdateRoom"
 import RoomUsers from "./RoomUsers"
-import { Separator } from "@/components/ui/separator"
-import { cn } from "@/lib/utils"
 
 type RoomPageCard = {
     room_id:string
@@ -20,7 +20,10 @@ const RoomPageCard = ({ room_id }:RoomPageCard)=>{
     return(
         <Card className="w-full">
             <CardHeader>
-                <CardTitle>{room.name}</CardTitle>
+                <div className="flex flex-row items-center justify-between">
+                    <CardTitle>{room.name}</CardTitle>
+                    <UpdateRoom room_id={room.id} room={room} />
+                </div>
                 <CardDescription>{new Date(room.createdAt).toLocaleDateString()}</CardDescription>
             </CardHeader>
             <Separator/>

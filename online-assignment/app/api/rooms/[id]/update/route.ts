@@ -5,24 +5,11 @@ export async function PUT(req:NextRequest,{params}:{params:RouteParams}){
     try {
 
         const { id } = params
-        const { name,roomId } = await req.json();
+        const { name } = await req.json();
 
-        const teacher = await prisma.user.findFirst({
+        const classRoom = await prisma.classroom.findUnique({
             where:{
                 id
-            }
-        })
-        
-        if(!teacher || teacher.role !== 'teacher'){
-            return NextResponse.json({message:"Unable to find teacher or an authorized user"},{status:401})
-        }
-
-        const classRoom = await prisma.classroom.findFirst({
-            where:{
-                AND:[
-                    {id:roomId},
-                    {teacherId:id}
-                ]
             }
         })
 
@@ -35,18 +22,17 @@ export async function PUT(req:NextRequest,{params}:{params:RouteParams}){
                 name
             },
             where:{
-                id:roomId,
-                teacherId:id
+                id,
             }
         })
 
         if(!updatedClassRoom){
-            return NextResponse.json({message:"Unable to update classRoom un expected error ocurred"},{status:201})
+            return NextResponse.json({message:"Unable to update classRoom unexpected error ocurred"},{status:201})
         }
         
         return NextResponse.json(updatedClassRoom,{status:200})
         
     } catch (error) {
-        return NextResponse.json({message:"unable to create room unexpected error ocurred"},{status:500})
+        return NextResponse.json({message:"unable to update room unexpected error ocurred"},{status:500})
     }
 }

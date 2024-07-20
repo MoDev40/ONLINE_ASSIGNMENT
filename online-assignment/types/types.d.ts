@@ -37,10 +37,9 @@ declare interface TeacherClassRoom  extends ClassRoom {
     userClassrooms:any[];
 }
 
-declare type CreateUpdateRoom = {
+declare type CreateRoom = {
     teacherId:string;
     room:{
-        roomId?:string;
         name:string;
     }
 }

@@ -44,7 +44,7 @@ const roomSLice = createApi({
             providesTags:['room']
         }),
 
-        createRoom:builder.mutation<ClassRoom,CreateUpdateRoom>({
+        createRoom:builder.mutation<ClassRoom,CreateRoom>({
             query:({teacherId,room})=>({
                 url:`/rooms/${teacherId}/create`,
                 method: 'POST',
@@ -53,11 +53,11 @@ const roomSLice = createApi({
             invalidatesTags:['room']
         }),
 
-        updateRoom:builder.mutation<ClassRoom,CreateUpdateRoom>({
-            query:({teacherId,room})=>({
-                url:`/rooms/${teacherId}/update`,
+        updateRoom:builder.mutation<ClassRoom,{ room_id:string,data:{ name:string } }>({
+            query:({room_id,data})=>({
+                url:`/rooms/${room_id}/update`,
                 method: 'PUT',
-                body:room
+                body:data
             }),
             invalidatesTags:['room']
         }),
