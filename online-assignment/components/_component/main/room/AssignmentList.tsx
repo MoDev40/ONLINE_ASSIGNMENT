@@ -35,6 +35,8 @@ const AssignmentList = ({ room_id,user_id }:Props) => {
       <TableRow>
         <TableHead>Title</TableHead>
         <TableHead>Due Date</TableHead>
+        <TableHead></TableHead>
+        <TableHead></TableHead>
       </TableRow>
     </TableHeader>
     <TableBody>
@@ -43,7 +45,7 @@ const AssignmentList = ({ room_id,user_id }:Props) => {
         assignments.map((assignment)=>(
         <TableRow key={assignment.id}>
           <TableCell className="font-medium">{assignment.title}</TableCell>
-          <TableCell>{format(new Date(assignment.dueDate),"PP")}</TableCell>
+          <TableCell>{format(new Date(assignment.dueDate),"P")}</TableCell>
           <TableCell> <Button size="sm"  variant="link" onClick={()=> router.push(`${pathName}/${assignment.id}/`)}>link</Button>
           </TableCell>
           <TableCell>

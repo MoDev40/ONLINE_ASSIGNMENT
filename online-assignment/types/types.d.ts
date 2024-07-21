@@ -75,4 +75,5 @@ declare type SubmittedFile = {
     fileUrl: string;
     fileKey: string;
     submittedAt: Date;
+    assignment?:Assignment
 }
