@@ -2,8 +2,10 @@
 import { useGetSubmitedFilesQuery } from "@/lib/features/roomSlice";
 import { format } from "date-fns";
 import { Button } from "../ui/button";
-import { File, Trash2 } from "lucide-react";
+import { Download, File, Link as LinkIcon, Trash2 } from "lucide-react";
 import Loading from "./Loading";
+import Link from "next/link";
+import { download } from "@/utils/Download";
 
 type SubmitedFilesCardProps = {
     assignment_id:string; 
@@ -22,11 +24,23 @@ const SubmitedFilesCard = (props:SubmitedFilesCardProps)=>{
             <div className="flex flex-row p-2 items-center justify-between">
               <div className="flex flex-col p-1">
                 <File/>
-                <p className="text-muted-foreground">At: {format(new Date(file.submittedAt),"PPP")}</p>
+                <p className="text-muted-foreground">submitted: {format(new Date(file.submittedAt),"PPP")}</p>
               </div>
-              <Button variant="ghost" size="icon" className="ml-auto">
-                <Trash2 className="w-4 h-4" />
-              </Button>
+              <div className="flex flex-row justify-between">
+                <Button variant="ghost" size="icon">
+                  <Trash2 className="w-4 h-4" />
+                </Button>
+                <Button variant="ghost" size="icon">
+                  <Link href={file.fileUrl} target="_blank">
+                    <LinkIcon className="w-4 h-4" />
+                  </Link>
+                </Button>
+                <Button onClick={()=>{
+                  download(file.fileUrl,`AnswerOf${file.assignment?.title}.${file.fileUrl.split(".")[2]}`)
+                }} variant="ghost" size="icon" >
+                  <Download className="w-4 h-4" />
+                </Button>
+              </div>
             </div>
           </div>
         ))}

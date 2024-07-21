@@ -16,6 +16,8 @@ export async function GET(req:NextRequest,{ params }:{ params:Params }){
                     {assignmentId},
                     {studentId}
                 ]
+            },include:{
+                assignment:true
             }
         })
         

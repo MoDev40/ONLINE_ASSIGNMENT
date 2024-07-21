@@ -20,11 +20,11 @@ const AssignmentPageCard = ({ room_id, user_id }:PageCardProps) => {
   }
 
   return (
-    <div className="grid grid-cols-1  md:grid-cols-2 gap-3 shadow-sm p-5 w-full">
-        <div>
+    <div className="grid grid-cols-1  md:grid-cols-2 gap-4 w-full">
+        <div className="md:shadow-md md:rounded-md md:bg-white md:p-5">
           <AssignmentList room_id={room_id} user_id={user.id} />
         </div>
-        <div>
+        <div className="shadow-md rounded-md bg-white p-5">
           <CreateAssignment room_id={room_id} user_id={user?.id as string}/>
         </div>
     </div>
