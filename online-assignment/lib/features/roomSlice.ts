@@ -142,7 +142,21 @@ const roomSLice = createApi({
                 url:`/rooms/${classroom_id}/assignments/delete/${teacher_id}/${assignment_id}`,
             }),
             invalidatesTags:["room"]
-        })
+        }),
+        deleteSubmittedFile:builder.mutation<SubmittedFile,{student_id:string;fileId:string;}>({
+            query:({student_id,fileId})=>({
+                method:"DELETE",
+                url:`/rooms/submitedfiles/delete/${fileId}/${student_id}`,
+            }),
+        }),
+        deleteServerFile:builder.mutation<string,string | string[]>({
+            query:(fileKeys)=>({
+                method:"DELETE",
+                url:"/uploadthing",
+                body:{ fileKeys }
+            }),
+            invalidatesTags:["room"]
+        }),
     })
 })
 
@@ -163,5 +177,7 @@ export const {
     useGetAssignmentQuery,
     useSubmitAssignmentAnswerMutation,
     useGetSubmitedFilesQuery,
-    useDeleteAssignmentMutation
+    useDeleteAssignmentMutation,
+    useDeleteServerFileMutation,
+    useDeleteSubmittedFileMutation
 } = roomSLice;

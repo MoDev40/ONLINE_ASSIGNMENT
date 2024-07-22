@@ -6,6 +6,7 @@ import { Download, File, Link as LinkIcon, Trash2 } from "lucide-react";
 import Loading from "./Loading";
 import Link from "next/link";
 import { download } from "@/utils/Download";
+import DeleteSubmittedFile from "./DeleteSubmittedFile";
 
 type SubmitedFilesCardProps = {
     assignment_id:string; 
@@ -27,9 +28,11 @@ const SubmitedFilesCard = (props:SubmitedFilesCardProps)=>{
                 <p className="text-muted-foreground">submitted: {format(new Date(file.submittedAt),"PPP")}</p>
               </div>
               <div className="flex flex-row justify-between">
-                <Button variant="ghost" size="icon">
-                  <Trash2 className="w-4 h-4" />
-                </Button>
+                <DeleteSubmittedFile 
+                  fileKey={file.fileKey}
+                  id={file.id}
+                  student_id={file.studentId}
+                />
                 <Button variant="ghost" size="icon">
                   <Link href={file.fileUrl} target="_blank">
                     <LinkIcon className="w-4 h-4" />
