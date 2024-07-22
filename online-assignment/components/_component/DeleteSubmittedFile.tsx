@@ -21,8 +21,8 @@ type DeleteSubmittedFileProps = {
     student_id:string;
 }
 const DeleteSubmittedFile = ({ fileKey,id,student_id }:DeleteSubmittedFileProps) => {
-    const [deleteServerFile] = useDeleteServerFileMutation()
-    const [deleteSubmittedFile] = useDeleteSubmittedFileMutation()
+    const [deleteServerFile,{ isLoading }] = useDeleteServerFileMutation()
+    const [deleteSubmittedFile,{ isLoading:load }] = useDeleteSubmittedFileMutation()
     async function handleDelete() {
         await deleteSubmittedFile({ student_id,fileId:id }).unwrap().then(async(res)=>{
             await deleteServerFile(res.fileKey).unwrap().then(()=>{
@@ -32,8 +32,8 @@ const DeleteSubmittedFile = ({ fileKey,id,student_id }:DeleteSubmittedFileProps)
     }
   return (
     <AlertDialog>
-    <AlertDialogTrigger>
-        <Button variant="ghost" size="icon">
+    <AlertDialogTrigger asChild>
+        <Button disabled={isLoading || load } variant="ghost" size="icon">
             <Trash2 className="w-4 h-4" />
         </Button>    
     </AlertDialogTrigger>
