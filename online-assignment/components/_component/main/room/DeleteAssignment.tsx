@@ -1,3 +1,4 @@
+"use client"
 import {
     AlertDialog,
     AlertDialogAction,
@@ -9,7 +10,8 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { useDeleteAssignmentMutation } from "@/lib/features/roomSlice";
+import { Button } from "@/components/ui/button";
+import { useDeleteAssignmentMutation, useDeleteServerFileMutation } from "@/lib/features/roomSlice";
 import { Trash2 } from "lucide-react";
 import toast from "react-hot-toast";
   
@@ -19,15 +21,22 @@ type DeleteAssignmentProps = {
     classroom_id: string;
 }
 const DeleteAssignment = (props:DeleteAssignmentProps) => {
-    const [deleteAssignment] = useDeleteAssignmentMutation()
+    const [deleteAssignment,{ isLoading }] = useDeleteAssignmentMutation()
+    const [deleteServerFile,{ isLoading:load}] = useDeleteServerFileMutation()
     async function handleDelete() {
-        await deleteAssignment(props)
+        await deleteAssignment(props).unwrap().then(async(res)=>{
+            await deleteServerFile(res.fileKey).unwrap().then(()=>{
+                toast.success("Successfully")
+            })
+        })
     }
 
   return (
     <AlertDialog>
-    <AlertDialogTrigger>
-        <Trash2 size={20}/>
+    <AlertDialogTrigger asChild>
+        <Button disabled={isLoading || load } variant="ghost" size="icon">
+            <Trash2 className="w-4 h-4" size={20}/>
+        </Button>
     </AlertDialogTrigger>
     <AlertDialogContent>
         <AlertDialogHeader>

@@ -8,6 +8,9 @@ export async function POST(req:NextRequest,{params}:{params:RouteParams}){
         const { id ,teacher_id } = params
         const { title,description,dueDate,fileKey,fileUrl } : Assignment = await req.json();
 
+        currentDate.setHours(0,0,0,0)
+        // dueDate.setHours(0,0,0,0)
+
         const teacher = await prisma.user.findUnique({
             where:{
                 id:teacher_id

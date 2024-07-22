@@ -69,7 +69,7 @@ const SubmitForm = ({ assignment_id,classroom_id,student_id }:SubmitFormProps) =
                 </FormItem>
             )}
             />
-            <Button disabled={isLoading} type="submit">{ isLoading ? <Loader2/> : "Submit"}</Button>
+            <Button disabled={isLoading} type="submit">{ isLoading ? <Loader2 className='animate-spin'/> : "Submit"}</Button>
         </form>
     </Form>
   )

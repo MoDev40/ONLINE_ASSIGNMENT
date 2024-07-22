@@ -36,13 +36,13 @@ export async function DELETE(req:NextRequest,{ params }:{ params:Params }){
             return NextResponse.json({message:"Unable to delete assignment only allowed teacher's can delete"},{ status:401 }) 
         }
         
-        await prisma.assignment.delete({
+        const deleteAssignment = await prisma.assignment.delete({
             where:{
                 id:assignment_id
             }
         })
 
-        return NextResponse.json("Deleted successfully",{ status:200 })
+        return NextResponse.json(deleteAssignment,{ status:200 })
         
     } catch (error) {
         return NextResponse.json({message:"unable to delete assignment unexpected error ocurred"},{status:500})
