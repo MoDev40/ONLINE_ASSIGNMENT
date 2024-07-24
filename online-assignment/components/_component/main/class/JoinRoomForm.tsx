@@ -56,13 +56,13 @@ const JoinRoomForm = ({ student_id }: JoinRoomFormProps) => {
         <DialogTrigger asChild>
         <Button size="sm">Join</Button>
         </DialogTrigger>
-            <DialogHeader>
+    <DialogContent>
+        <DialogHeader>
             <DialogTitle>Join the Classroom</DialogTitle>
             <DialogDescription>
                 Access assignments, submit your responses, and engage with your peers and instructors.
             </DialogDescription>
         </DialogHeader>
-    <DialogContent>
         <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="w-full grid flex-1 gap-2 space-y-4">
                 <FormField
