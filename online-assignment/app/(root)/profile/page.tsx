@@ -1,4 +1,4 @@
-import Profile from '@/components/_component/Profile'
+import Profile from '@/components/_component/profile/Profile';
 import { auth } from '@clerk/nextjs/server';
 import React from 'react'
 

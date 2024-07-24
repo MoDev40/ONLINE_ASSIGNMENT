@@ -1,5 +1,5 @@
-import DeskNav from '@/components/_component/main/DeskNav'
-import MobileNav from '@/components/_component/main/MobileNav'
+import DeskNav from '@/components/_component/navigation/DeskNav'
+import MobileNav from '@/components/_component/navigation/MobileNav'
 import { SignedIn, SignedOut } from "@clerk/nextjs"
 import { auth } from '@clerk/nextjs/server'
 import Link from "next/link"

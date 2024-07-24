@@ -1,10 +1,10 @@
-import RoomsCard from "@/components/_component/main/rooms/RoomsCard"
+import ClassesCard from "@/components/_component/main/teacher/ClassesCard";
 import { auth } from "@clerk/nextjs/server";
 
 function RoomsPage() {
   const { userId } : { userId: string | null } = auth();
   return (
-    <RoomsCard userId={userId as string}/>
+    <ClassesCard userId={userId as string}/>
   )
 }
 

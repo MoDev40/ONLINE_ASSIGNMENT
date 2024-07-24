@@ -4,10 +4,10 @@ import { useGetUserQuery } from "@/lib/features/userSlice"
 import useScroll from "@/lib/scroll"
 import Link from "next/link"
 import Loading from "../../Loading"
+import ClassCard from "./ClassCard"
 import CreateRoomDialog from "./CreateRoomDialog"
-import RoomCard from "./RoomCard"
 
-const RoomsCard = ({ userId }:{ userId:string })=> {
+const ClassesCard = ({ userId }:{ userId:string })=> {
     const { data:user,isLoading } = useGetUserQuery(userId)
     const { data:rooms,isFetching } = useGetRoomsQuery(user?.id as string)
     const scrolled = useScroll(50)
@@ -32,7 +32,7 @@ const RoomsCard = ({ userId }:{ userId:string })=> {
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 container mx-auto xl:grid-cols-4 mt-6 lg:grid-cols-3">
                 {   rooms&&
                     rooms.map((room)=>(
-                        <RoomCard key={room.id} room={room}/>
+                        <ClassCard key={room.id} room={room}/>
                     ))
                 }
             </div>
@@ -41,4 +41,4 @@ const RoomsCard = ({ userId }:{ userId:string })=> {
     )
 }
 
-export default RoomsCard
+export default ClassesCard

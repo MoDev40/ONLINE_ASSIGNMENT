@@ -1,4 +1,4 @@
-import Home from "@/components/_component/base/Home"
+import Home from "@/components/_component/root/Home"
 
 function HomePage() {
   return (
