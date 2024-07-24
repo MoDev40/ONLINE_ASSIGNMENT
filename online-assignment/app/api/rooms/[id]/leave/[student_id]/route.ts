@@ -12,6 +12,8 @@ export async function DELETE(req:NextRequest,{params}:{params:RouteParams}){
                     {id},
                     { userId: student_id}
                 ]
+            },include:{
+                submissions:true
             }
         })
 
@@ -29,7 +31,9 @@ export async function DELETE(req:NextRequest,{params}:{params:RouteParams}){
             return NextResponse.json({message:"Unable to Leave: unexpected error"},{status:400})
         }
 
-        return NextResponse.json('Successfully Leaved the room',{status:200});
+        const keys : string[] = classRoom?.submissions?.length > 0 ? classRoom?.submissions?.map((s)=>( s.fileKey )) : []
+
+        return NextResponse.json(keys,{ status:200 });
         
     } catch (error) {
         return NextResponse.json({message:"unable to find rooms unexpected error ocurred"},{status:500})
