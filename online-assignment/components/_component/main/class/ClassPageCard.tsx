@@ -4,13 +4,13 @@ import { Separator } from "@/components/ui/separator"
 import { useGetRoomQuery } from "@/lib/features/roomSlice"
 import Loading from "../../Loading"
 import UpdateRoom from "../teacher/UpdateRoom"
-import RoomUsers from "./RoomUsers"
+import ClassUsers from "./ClassUsers"
 
-type RoomPageCard = {
+type ClassPageCard = {
     room_id:string
 }
 
-const RoomPageCard = ({ room_id }:RoomPageCard)=>{
+const ClassPageCard = ({ room_id }:ClassPageCard)=>{
     const { data:room, isFetching,isLoading } = useGetRoomQuery(room_id as string)
 
     if(isLoading || isFetching) return <div className="container mx-auto"><Loading/></div>
@@ -28,10 +28,10 @@ const RoomPageCard = ({ room_id }:RoomPageCard)=>{
             </CardHeader>
             <Separator/>
             <CardContent className="p-5">
-                <RoomUsers room_id={room.id}/>
+                <ClassUsers room_id={room.id}/>
             </CardContent>
         </Card>
     )
 }
 
-export default RoomPageCard
+export default ClassPageCard

@@ -7,7 +7,7 @@ import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { z } from 'zod'
-import FileUpload from '../../FileUpload'
+import FileUpload from '../../media-upload/FileUpload'
 
 const formSchema = z.object({
     fileUrl:z.string().min(1,{

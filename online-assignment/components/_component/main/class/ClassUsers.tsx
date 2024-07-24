@@ -12,10 +12,10 @@ import { usePathname, useRouter } from "next/navigation";
 import Loading from "../../Loading";
 
 
-type RoomUsersProps = {
+type ClassUsersProps = {
     room_id:string;
 }
-const RoomUsers = ({ room_id }:RoomUsersProps) => {
+const ClassUsers = ({ room_id }:ClassUsersProps) => {
     const router = useRouter()
     const pathName = usePathname()
     const { data:roomUsers, isFetching , isLoading } = useGetRoomUsersQuery(room_id)
@@ -47,4 +47,4 @@ const RoomUsers = ({ room_id }:RoomUsersProps) => {
   )
 }
 
-export default RoomUsers
+export default ClassUsers

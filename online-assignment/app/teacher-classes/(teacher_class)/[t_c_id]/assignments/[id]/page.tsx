@@ -1,4 +1,4 @@
-import Assignment from "@/components/_component/main/room/Assignment"
+import Assignment from "@/components/_component/main/class/Assignment"
 
 const page = ({ params }:{ params:RouteParams}) => {
   return (

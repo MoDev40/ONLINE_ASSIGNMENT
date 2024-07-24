@@ -1,7 +1,7 @@
 "use client"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useGetAssignmentsQuery } from "@/lib/features/roomSlice";
 import { Dispatch, SetStateAction } from "react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 
 type SelectAssignmentProps = {
     student_id:string;
@@ -9,7 +9,7 @@ type SelectAssignmentProps = {
     setAssignment_id:Dispatch<SetStateAction<string>>;
 }
 
-const SelectAssignmentCard = ({ student_id,assignment_id,setAssignment_id }:SelectAssignmentProps)=>{
+const SelectAssignment = ({ student_id,assignment_id,setAssignment_id }:SelectAssignmentProps)=>{
     const { data:assignments } = useGetAssignmentsQuery(student_id);
     return(
         <Select
@@ -33,4 +33,4 @@ const SelectAssignmentCard = ({ student_id,assignment_id,setAssignment_id }:Sele
     )
 }
 
-export default SelectAssignmentCard
+export default SelectAssignment

@@ -1,7 +1,7 @@
 "use client"
+import { Card } from "@/components/ui/card";
 import { useGetUserQuery } from "@/lib/features/userSlice";
-import { Card } from "../../ui/card";
-import CompleteRegisterForm from "../CompleteRegisterForm";
+import CompleteRegisterForm from "../auth/CompleteRegisterForm";
 import Loading from "../Loading";
 import ProfileHeader from "./ProfileHeader";
 

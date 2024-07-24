@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react";
-import SelectAssignmentCard from "./SelectAssignmentCard";
+import SelectAssignment from "./SelectAssignment";
 import SubmitedFilesCard from "./SubmitedFilesCard";
 
 type Props = {
@@ -13,7 +13,7 @@ const SubmitedFiles = ({ student_id }:Props) => {
 
     return (
     <div className="w-full md:container gap-3 mx-auto flex flex-col">
-        <SelectAssignmentCard
+        <SelectAssignment
             setAssignment_id={setAssignment_id}
             assignment_id={assignment_id}
             student_id={student_id}

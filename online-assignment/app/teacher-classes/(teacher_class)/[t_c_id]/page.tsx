@@ -1,9 +1,10 @@
-import RoomPageCard from "@/components/_component/main/room/RoomPageCard"
-function RoomPage({ params }:{ params:RouteParams }) {
+import ClassPageCard from "@/components/_component/main/class/ClassPageCard"
+
+function ClassPage({ params }:{ params:RouteParams }) {
   const { t_c_id } = params
   return (
-    <RoomPageCard room_id={t_c_id}/>
+    <ClassPageCard room_id={t_c_id}/>
   )
 }
 
-export default RoomPage
+export default ClassPage

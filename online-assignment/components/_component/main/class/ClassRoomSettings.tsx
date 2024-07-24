@@ -2,8 +2,8 @@
 import { CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { useGetUserQuery } from '@/lib/features/userSlice'
 import { cn } from '@/lib/utils'
-import LeaveOrDeleteRoomForm from './LeaveOrDeleteRoomForm'
-import Loading from './Loading'
+import LeaveOrDeleteRoomForm from './LeaveOrDeleteRoomForm' 
+import Loading from '../../Loading'
 
 type ClassRoomSettingsProps = {
   user_id: string;

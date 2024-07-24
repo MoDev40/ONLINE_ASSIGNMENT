@@ -1,8 +1,8 @@
 "use client"
 
 import { Suspense } from "react";
-import Assignment from "../room/Assignment";
 import Loading from "../../Loading";
+import Assignment from "../class/Assignment";
 import SubmitForm from "./SubmitForm";
 
 type AssignmentAndSubmitPageProps = {

@@ -1,4 +1,4 @@
-import SubmitedFiles from '@/components/_component/SubmitedFiles'
+import SubmitedFiles from '@/components/_component/submitted-file/SubmitedFiles'
 import React from 'react'
 
 const SubmitedFilesPage = ({ params }:{ params : RouteParams }) => {
