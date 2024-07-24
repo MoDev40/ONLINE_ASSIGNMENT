@@ -14,7 +14,7 @@ import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { string, z } from "zod";
-import FileUpload from "../../FileUpload";
+import FileUpload from "../../media-upload/FileUpload";
 import Loader from "../../Loader";
 
 type CreateAssignmentProps = {

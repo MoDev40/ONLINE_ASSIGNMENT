@@ -3,10 +3,10 @@ import { useCompleteSingUpMutation, useGetUserQuery } from "@/lib/features/userS
 import { Loader2 } from "lucide-react"
 import { useState } from "react"
 import toast from "react-hot-toast"
-import { Button } from "../ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card"
+import { Button } from "../../ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../ui/card"
 import CompleteRegisterForm from "./CompleteRegisterForm"
-import Loading from "./Loading"
+import Loading from "../Loading"
 import RoleSelection from "./RoleSelection"
 
 

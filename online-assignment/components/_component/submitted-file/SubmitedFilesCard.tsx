@@ -1,11 +1,11 @@
 "use client"
+import { Button } from "@/components/ui/button";
 import { useGetSubmitedFilesQuery } from "@/lib/features/roomSlice";
-import { format } from "date-fns";
-import { Button } from "../ui/button";
-import { Download, File, Link as LinkIcon, Trash2 } from "lucide-react";
-import Loading from "./Loading";
-import Link from "next/link";
 import { download } from "@/utils/Download";
+import { format } from "date-fns";
+import { Download, File, Link as LinkIcon } from "lucide-react";
+import Link from "next/link";
+import Loading from "../Loading";
 import DeleteSubmittedFile from "./DeleteSubmittedFile";
 
 type SubmitedFilesCardProps = {

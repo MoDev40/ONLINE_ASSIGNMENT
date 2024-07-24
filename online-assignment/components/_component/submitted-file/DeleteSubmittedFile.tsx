@@ -13,7 +13,7 @@ import {
 import { useDeleteServerFileMutation, useDeleteSubmittedFileMutation } from "@/lib/features/roomSlice";
 import { Trash2 } from "lucide-react";
 import toast from "react-hot-toast";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 
 type DeleteSubmittedFileProps = {
     id:string;
