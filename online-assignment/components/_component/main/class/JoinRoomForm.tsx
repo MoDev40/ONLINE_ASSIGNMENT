@@ -1,6 +1,6 @@
 "use client"
 import { Button } from '@/components/ui/button'
-import { Dialog, DialogClose, DialogContent, DialogFooter, DialogTrigger } from '@/components/ui/dialog'
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import {
     Form,
     FormControl,
@@ -56,6 +56,12 @@ const JoinRoomForm = ({ student_id }: JoinRoomFormProps) => {
         <DialogTrigger asChild>
         <Button size="sm">Join</Button>
         </DialogTrigger>
+            <DialogHeader>
+            <DialogTitle>Join the Classroom</DialogTitle>
+            <DialogDescription>
+                Access assignments, submit your responses, and engage with your peers and instructors.
+            </DialogDescription>
+        </DialogHeader>
     <DialogContent>
         <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="w-full grid flex-1 gap-2 space-y-4">
