@@ -4,10 +4,11 @@ import { Separator } from "@/components/ui/separator"
 import { File, KeyRound, Users2Icon } from "lucide-react"
 import Link from "next/link"
 
-type RoomCardProps = {
+type ClassCardProps = {
     room: TeacherClassRoom
 }
-const RoomCard = ({ room }:RoomCardProps) => {
+
+const ClassCard = ({ room }:ClassCardProps) => {
   return (
     <Link href={`/teacher-classes/${room.id}`}>
     <Card>
@@ -41,4 +42,4 @@ const RoomCard = ({ room }:RoomCardProps) => {
   )
 }
 
-export default RoomCard
+export default ClassCard

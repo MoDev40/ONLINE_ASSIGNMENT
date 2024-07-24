@@ -1,14 +1,13 @@
 "use client"
 import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { useGetUserQuery } from "@/lib/features/userSlice"
-import { UserButton } from "@clerk/nextjs"
 import { File, FolderTree, Home, Menu, Settings2 } from "lucide-react"
 import Link from "next/link"
 import { useParams } from "next/navigation"
 
 type MobileNavProps = {
-    userId: string;
+  userId: string;
 }
 const MobileNav = ({ userId }:MobileNavProps) => {
     const { data:user } = useGetUserQuery(userId)
@@ -22,13 +21,17 @@ const MobileNav = ({ userId }:MobileNavProps) => {
         <span className="sr-only">Menu</span>
       </Button>
     </SheetTrigger>
-    <SheetContent side="left" className="sm:max-w-xs">
-      <nav className="grid gap-6 text-lg font-medium">
-    <Link 
-        href={user&& user.role === "student" ? `/student-classes/${ params.c_id }` : `/teacher-classes/${params.t_c_id}`}
-        className="flex flex-row space-x-3 items-center" >
-      <h3 className="text-rose-600 text-xl font-black">EDP</h3>
-    </Link>
+    <SheetContent side="left" className="sm:max-w-xs" title="menu">
+      <SheetTitle>
+        <Link 
+          href={user&& user.role === "student" ? `/student-classes/${ params.c_id }` : `/teacher-classes/${params.t_c_id}`}
+          className="flex flex-row space-x-3 items-center" >
+          <h3 className="text-rose-600 text-xl font-black">EDP</h3>
+        </Link>
+      </SheetTitle>
+      <SheetDescription hidden>mobile navigation menu</SheetDescription>
+      <nav className="grid gap-6 mt-4 text-lg font-medium">
+
       <ul className="flex flex-col space-y-5">
             <li>
               <Link
@@ -66,9 +69,6 @@ const MobileNav = ({ userId }:MobileNavProps) => {
                 <Settings2/>
                 <span>Setting</span>
               </Link>
-            </li>
-            <li>
-              <UserButton showName afterSignOutUrl="/"/>
             </li>
         </ul>
       </nav>

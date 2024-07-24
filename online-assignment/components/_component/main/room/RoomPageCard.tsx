@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Separator } from "@/components/ui/separator"
 import { useGetRoomQuery } from "@/lib/features/roomSlice"
 import Loading from "../../Loading"
-import UpdateRoom from "../rooms/UpdateRoom"
+import UpdateRoom from "../teacher/UpdateRoom"
 import RoomUsers from "./RoomUsers"
 
 type RoomPageCard = {

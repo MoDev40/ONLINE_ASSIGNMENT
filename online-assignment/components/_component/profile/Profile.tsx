@@ -1,8 +1,8 @@
 "use client"
 import { useGetUserQuery } from "@/lib/features/userSlice";
-import { Card } from "../ui/card";
-import CompleteRegisterForm from "./CompleteRegisterForm";
-import Loading from "./Loading";
+import { Card } from "../../ui/card";
+import CompleteRegisterForm from "../CompleteRegisterForm";
+import Loading from "../Loading";
 import ProfileHeader from "./ProfileHeader";
 
 type ProfileProps = {

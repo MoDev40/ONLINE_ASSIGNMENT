@@ -8,7 +8,7 @@ import {
 
 import { cn } from "@/lib/utils"
 import AvatarCard from "./AvatarCard"
-import { Label } from "../ui/label"
+import { Label } from "@/components/ui/label"
 
 type ProfileHeaderProps = {
     user:UserData
