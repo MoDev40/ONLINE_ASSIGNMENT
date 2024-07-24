@@ -109,7 +109,7 @@ const roomSLice = createApi({
             providesTags:["room"]
         }),
 
-        leaveRoom:builder.mutation<string,DeleteOrLeaveRoomParams>({
+        leaveRoom:builder.mutation<string[],DeleteOrLeaveRoomParams>({
             query:({roomId,student_id})=>({
                 url:`/rooms/${roomId}/leave/${student_id}`,
                 method:"DELETE",
@@ -130,7 +130,8 @@ const roomSLice = createApi({
                 url:`/rooms/${classroom_id}/assignments/submit/${student_id}/${assignment_id}`,
                 method: 'POST',
                 body:data
-            })
+            }),
+            invalidatesTags:["room"]
         }),
         getSubmitedFiles:builder.query<SubmittedFile[],{ assignment_id:string; student_id:string; }>({
             query:({assignment_id,student_id})=> `/rooms/submitedfiles/${assignment_id}/${student_id}`,

@@ -9,13 +9,13 @@ import {
     FormMessage
 } from "@/components/ui/form"
 import { Input } from '@/components/ui/input'
-import { useDeleteRoomMutation, useLeaveRoomMutation } from '@/lib/features/roomSlice'
+import { useDeleteRoomMutation, useDeleteServerFileMutation, useLeaveRoomMutation } from '@/lib/features/roomSlice'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Loader2, Route } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { z } from 'zod'
+import Loader from '../../Loader'
 
 
 type LeaveRoomFormProps = {
@@ -36,6 +36,7 @@ const LeaveOrDeleteRoomForm = ({ user_id,room_id,action }: LeaveRoomFormProps) =
     type Inputs = z.infer<typeof formSchema>
 
     const [ leaveRoom,{ isLoading }] = useLeaveRoomMutation()
+    const [ deleteFile,{ isLoading:fileLoad }] = useDeleteServerFileMutation()
     const [ deleteClass,{ isLoading:DeleteLoad }] = useDeleteRoomMutation()
 
     const form = useForm<Inputs>({
@@ -47,6 +48,10 @@ const LeaveOrDeleteRoomForm = ({ user_id,room_id,action }: LeaveRoomFormProps) =
     
     const router = useRouter()
 
+    function notifyPush (action:string,path:string){
+        toast.success(`Room ${action} successfully`)
+        router.push(path)
+    }
     const  onSubmit : SubmitHandler<Inputs>  = async(data) => {
         const { code } = data;
 
@@ -54,8 +59,7 @@ const LeaveOrDeleteRoomForm = ({ user_id,room_id,action }: LeaveRoomFormProps) =
 
             await deleteClass({roomId:room_id,teacherId:user_id}).unwrap()
             .then(() => {
-                toast.success("Room Deleted successfully")
-                router.push("/teacher-classes")
+                notifyPush(action,"/teacher-classes")
                 form.reset()
             }).catch(() => {
                 toast.error("Unable to leave room")
@@ -65,9 +69,12 @@ const LeaveOrDeleteRoomForm = ({ user_id,room_id,action }: LeaveRoomFormProps) =
         }else if (code === "Leave" && action === "Leave"){
 
             await leaveRoom({ student_id:user_id,roomId:room_id }).unwrap()
-            .then(() => {
-                toast.success("Room leaved successfully")
-                router.push("/student-classes")
+            .then(async(res) => {
+                res.length > 0 ?
+                await deleteFile(res).unwrap().then(()=>{
+                    notifyPush(action,"/student-classes")
+                }):
+                    notifyPush(action,"/student-classes")
                 form.reset()
             }).catch(() => {
                 toast.error("Unable to leave room")
@@ -96,7 +103,7 @@ const LeaveOrDeleteRoomForm = ({ user_id,room_id,action }: LeaveRoomFormProps) =
                 </FormItem>
             )}
             />
-            <Button className='w-24' disabled={isLoading || DeleteLoad} type="submit" >{isLoading || DeleteLoad ? <Loader2 className="animate-spin"/> : `${action}`}</Button>
+            <Button className='w-24' disabled={isLoading || DeleteLoad || fileLoad} type="submit" >{isLoading || DeleteLoad || fileLoad? <Loader /> : `${action}`}</Button>
     </form>
     </Form>  
     )
