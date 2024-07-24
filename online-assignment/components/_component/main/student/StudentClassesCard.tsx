@@ -4,7 +4,7 @@ import { useGetUserQuery } from '@/lib/features/userSlice'
 import useScroll from '@/lib/scroll'
 import Link from 'next/link'
 import Loading from '../../Loading'
-import JoinRoomForm from '../room/JoinRoomForm'
+import JoinRoomForm from '../class/JoinRoomForm'
 import StudentClassCard from './StudentClassCard'
 
 const StudentClassesCard = ({ userId }:{ userId:string }) => {

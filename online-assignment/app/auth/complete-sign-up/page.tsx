@@ -1,4 +1,4 @@
-import CompleteSignUp from '@/components/_component/CompleteSignUp';
+import CompleteSignUp from '@/components/_component/auth/CompleteSignUp';
 import { auth } from '@clerk/nextjs/server';
 
 function CompleteSignUpPage() {

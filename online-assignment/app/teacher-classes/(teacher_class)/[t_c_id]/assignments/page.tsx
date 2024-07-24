@@ -1,4 +1,4 @@
-import AssignmentPageCard from "@/components/_component/main/room/AssignmentPageCard";
+import AssignmentPageCard from "@/components/_component/main/class/AssignmentPageCard";
 import { auth } from "@clerk/nextjs/server";
 
 function AssignmentsPage({ params }:{ params:RouteParams}) {

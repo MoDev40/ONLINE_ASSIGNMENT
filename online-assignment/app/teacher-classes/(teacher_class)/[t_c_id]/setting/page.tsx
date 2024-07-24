@@ -1,4 +1,4 @@
-import ClassRoomSettings from '@/components/_component/ClassRoomSettings';
+import ClassRoomSettings from '@/components/_component/main/class/ClassRoomSettings';
 import { auth } from '@clerk/nextjs/server';
 
 const TeacherClassSettingPage = ({ params }:{ params:RouteParams }) => {
