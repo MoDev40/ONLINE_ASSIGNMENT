@@ -46,15 +46,15 @@ const CompleteRegisterForm = ({ user , role } : FormProps) => {
     await completeSignUp({id:user?.id!, userData}).unwrap().then(()=>{
       toast.success("Successfully Updated")
       form.reset()
-      window.location.pathname = "/"
     }).catch(()=>{
       toast.error("Failed try again")
     })
     
   }
-    if(role !== "student"){
-      return null
-    }
+  
+  if(role !== "student"){
+    return null
+  }
     
   return (
     <Form {...form}>
