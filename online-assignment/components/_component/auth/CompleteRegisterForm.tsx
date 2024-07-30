@@ -4,6 +4,7 @@ import { useCompleteSingUpMutation } from "@/lib/features/userSlice";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { z } from "zod";
@@ -32,20 +33,22 @@ const schema = z.object({
 type Inputs = z.infer<typeof schema>
 
 const CompleteRegisterForm = ({ user , role } : FormProps) => {
+  const router = useRouter()
   const [ completeSignUp,{ isLoading }] = useCompleteSingUpMutation()
   const form = useForm<Inputs>({
     resolver:zodResolver(schema)
   })
 
-  const onSubmit : SubmitHandler<Inputs> = async(data) => {
 
-    const {idCard,name , className} = data
+  const onSubmit : SubmitHandler<Inputs> = async(data) => {
     
+    const {idCard,name , className} = data
     const userData = { idCard, name, role, className }
     
     await completeSignUp({id:user?.id!, userData}).unwrap().then(()=>{
       toast.success("Successfully Updated")
       form.reset()
+      router.push("/")
     }).catch(()=>{
       toast.error("Failed try again")
     })
