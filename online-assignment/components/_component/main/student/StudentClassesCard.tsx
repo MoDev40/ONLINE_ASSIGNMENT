@@ -4,9 +4,9 @@ import { useGetUserQuery } from '@/lib/features/userSlice'
 import useScroll from '@/lib/scroll'
 import Link from 'next/link'
 import Loading from '../../Loading'
+import ProfileAlertDialog from '../../profile/ProfileAlertDialog'
 import JoinRoomForm from '../class/JoinRoomForm'
 import StudentClassCard from './StudentClassCard'
-import toast from 'react-hot-toast'
 
 const StudentClassesCard = ({ userId }:{ userId:string }) => {
     const scrolled = useScroll(50);
@@ -20,10 +20,8 @@ const StudentClassesCard = ({ userId }:{ userId:string }) => {
         return null
     }
 
-    if(user?.idCard === null || user?.name === null || user?.className === null) {
-        alert("Please complete your profile");
-        window.location.pathname = "/profile"
-        return null
+    if(user?.idCard === null || user?.name === null || user?.className === null && !isLoading) {
+      return <ProfileAlertDialog />
     }
     
     return(
