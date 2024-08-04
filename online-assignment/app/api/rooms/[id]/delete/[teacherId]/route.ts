@@ -1,7 +1,7 @@
 import prisma from "@/lib/client";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function DELETE(req:NextRequest,{params}:{params:RouteParams}){
+export async function DELETE(_req:NextRequest,{ params }:{params:RouteParams}){
     try {
 
         const { id,teacherId } = params
@@ -12,12 +12,21 @@ export async function DELETE(req:NextRequest,{params}:{params:RouteParams}){
                     {id},
                     {teacherId}
                 ]
+            },include:{
+                submissions:true,
+                assignments:true
             }
         })
 
         if(!classRoom){
             return NextResponse.json({message:"Unable to find: room not exist"},{status:404})
         }
+
+        const { submissions, assignments } = classRoom
+        const fileKeys = [
+            ...assignments.map((a)=>( a.fileKey)),
+            ...submissions.map((s)=>( s.fileKey))
+        ]
 
         const deletedRoom = await prisma.classroom.delete({
             where:{
@@ -29,9 +38,9 @@ export async function DELETE(req:NextRequest,{params}:{params:RouteParams}){
             return NextResponse.json({message:"Unable to Delete: unexpected error"},{status:400})
         }
 
-        return NextResponse.json('Successfully deleted room',{status:200});
+        return NextResponse.json(fileKeys,{status:200});
         
     } catch (error) {
-        return NextResponse.json({message:"unable to find rooms unexpected error ocurred"},{status:500})
+        return NextResponse.json({message:"Unable to Delete room: unexpected error ocurred"},{status:500})
     }
 }

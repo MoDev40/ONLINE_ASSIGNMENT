@@ -48,7 +48,7 @@ const LeaveOrDeleteRoomForm = ({ user_id,room_id,action }: LeaveRoomFormProps) =
     
     const router = useRouter()
 
-    function notifyPush (action:string,path:string){
+    function notifyAndRedirect (action:string,path:string){
         toast.success(`Room ${action} successfully`)
         router.push(path)
     }
@@ -58,32 +58,29 @@ const LeaveOrDeleteRoomForm = ({ user_id,room_id,action }: LeaveRoomFormProps) =
         if(code === "Delete" && action === "Delete"){
 
             await deleteClass({roomId:room_id,teacherId:user_id}).unwrap()
-            .then(() => {
-                notifyPush(action,"/teacher-classes")
-                form.reset()
-            }).catch(() => {
-                toast.error("Unable to leave room")
-            });           
-            
-            return
+            .then(async(res) => {
+                res.length > 0 ?
+                await deleteFile(res).unwrap().then(()=>{
+                    notifyAndRedirect(action,"/student-classes")
+                }):
+                notifyAndRedirect(action,"/student-classes")
+                }).catch(() => {
+                toast.error("Unable to Delete room")
+            });                       
         }else if (code === "Leave" && action === "Leave"){
 
             await leaveRoom({ student_id:user_id,roomId:room_id }).unwrap()
             .then(async(res) => {
                 res.length > 0 ?
                 await deleteFile(res).unwrap().then(()=>{
-                    notifyPush(action,"/student-classes")
+                    notifyAndRedirect(action,"/student-classes")
                 }):
-                    notifyPush(action,"/student-classes")
-                form.reset()
+                notifyAndRedirect(action,"/student-classes")
             }).catch(() => {
                 toast.error("Unable to leave room")
             });   
-
-            return
         }else{
             toast.error(`Invalid: Write ${action} to proceed`)
-            return
         }
     }
 
