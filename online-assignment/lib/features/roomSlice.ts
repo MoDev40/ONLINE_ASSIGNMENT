@@ -84,15 +84,13 @@ const roomSLice = createApi({
                 method: 'POST',
                 body:assignment
             }),
-            invalidatesTags:['room']
         }),
         
-        deleteRoom:builder.mutation<string,DeleteOrLeaveRoomParams>({
+        deleteRoom:builder.mutation<string[],DeleteOrLeaveRoomParams>({
             query:({roomId,teacherId})=>({
                 url:`/rooms/${roomId}/delete/${teacherId}`,
                 method: 'DELETE',
             }),
-            invalidatesTags:['room']
         }),
 
         joinRoom:builder.mutation<StudentRoom,JoinRoom>({
