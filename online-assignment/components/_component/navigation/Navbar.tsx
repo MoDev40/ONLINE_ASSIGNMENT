@@ -61,7 +61,7 @@ const Navbar = ({ userId }:NavbarProps) => {
             </li>
             <li>
               <SignedOut>
-                  <Link href='/auth/sign-in'><Button className="px-5">Login</Button></Link>
+                  <Link href='/auth/sign-in'><Button size="sm" className="px-5">Login</Button></Link>
               </SignedOut>
             </li>
           </ul>
