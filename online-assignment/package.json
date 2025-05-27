@@ -31,7 +31,7 @@
     "date-fns": "^3.6.0",
     "input-otp": "^1.2.4",
     "lucide-react": "^0.396.0",
-    "next": "14.2.4",
+    "next": "14.2.29",
     "randomatic": "^3.1.1",
     "react": "^18",
     "react-day-picker": "^8.10.1",
